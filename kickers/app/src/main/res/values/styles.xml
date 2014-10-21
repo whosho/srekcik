@@ -1,0 +1,45 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="android:Theme.Holo.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="score_info">
+        <item name="android:textAppearance">?android:textAppearanceLarge</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="match_score">
+        <item name="android:textSize">50sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+
+    <style name="match_field_player_name">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">22sp</item>
+    </style>
+
+    <style name="match_field_player_red_name" parent="match_field_player_name">
+        <item name="android:background">@color/red_team_color</item>
+    </style>
+
+    <style name="match_field_player_blue_name" parent="match_field_player_name">
+        <item name="android:background">@color/blue_team_color</item>
+    </style>
+
+    <style name="Area" parent="Theme.AppCompat.Light">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="game_rules_item">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+</resources>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="@string/pick_players"
+        android:textAppearance="?android:textAppearanceLarge"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tv_available"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:gravity="center"
+                android:text="@string/available_players"
+                android:textAppearance="?android:textAppearanceMedium" />
+
+            <Button
+                android:id="@+id/b_create_new"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:text="@string/create_new_player" />
+
+            <ListView
+                android:id="@+id/lv_available_players"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/b_create_new"
+                android:layout_below="@id/tv_available">
+
+            </ListView>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tv_chosen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:gravity="center"
+                android:text="@string/chosen_players"
+                android:textAppearance="?android:textAppearanceMedium" />
+
+            <Button
+                android:id="@+id/b_play"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:text="@string/start_playing" />
+
+            <ListView
+                android:id="@+id/lv_chosen_players"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/b_play"
+                android:layout_below="@id/tv_chosen" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_warning"
+                android:text="4 players needed"
+                android:layout_alignTop="@id/lv_chosen_players"
+                android:gravity="center"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="BoxPoints">
+        <attr name="teamColor" format="enum">
+            <enum name="Blue" value="0" />
+            <enum name="Red" value="1" />
+        </attr>
+        <attr name="inverted" format="boolean"/>
+    </declare-styleable>
+</resources>

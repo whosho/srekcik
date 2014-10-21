@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Kickers</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- Pick players -->
+    <string name="pick_players">Pick players</string>
+    <string name="available_players">Available</string>
+    <string name="chosen_players">Chosen</string>
+    <string name="create_new_player">New player</string>
+    <string name="start_playing">GO PLAY!</string>
+    <string name="game_finished">GAME FINISHED!</string>
+
+    <!-- Match area -->
+    <string name="match_info">Match %1$s / %2$s</string>
+    <string name="score_separator">&#160;:&#160;</string>
+    <string name="select_game_rules">Select game rules</string>
+
+    <!-- Match finished dialog -->
+    <string name="match_finished">Match finished</string>
+    <string name="goals">Goals</string>
+    <string name="own_goals">Own goals</string>
+    <string name="red_team_wins">Red team wins!</string>
+    <string name="blue_team_wins">Blue team wins!</string>
+    <string name="goto_next_match">GO TO NEXT MATCH!</string>
+
+    <!-- Create player dialog -->
+    <string name="save_player">Save player</string>
+    <string name="create_player_title">Create new player</string>
+    <string name="player_name">Player name</string>
+
+    <!-- Register goal dialog -->
+    <string name="goal">Goal!</string>
+    <string name="own_goal">Frack! Own goal :(</string>
+    <string name="delete_goal">Delete last goal</string>
+    <string name="register_goal">Register goal</string>
+
+</resources>

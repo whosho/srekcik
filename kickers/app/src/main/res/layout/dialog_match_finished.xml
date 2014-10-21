@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_match_finished_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:padding="10dp"
+        android:textAppearance="?android:textAppearanceLarge"
+        android:textStyle="bold"
+        tools:text="Red team wins!" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/tv_separator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text=":"
+            android:textAppearance="?android:textAppearanceLarge"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_blue_points"
+            style="@style/match_field_player_blue_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/tv_separator"
+            android:layout_toStartOf="@id/tv_separator"
+            android:gravity="center"
+            android:padding="10dp"
+            tools:text="5" />
+
+        <TextView
+            android:id="@+id/tv_red_points"
+            style="@style/match_field_player_red_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/tv_separator"
+            android:layout_toRightOf="@id/tv_separator"
+            android:gravity="center"
+            android:padding="10dp"
+            tools:text="3" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TableLayout
+            android:id="@+id/tl_match_history"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:padding="5dp" />
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/b_goto_next_match"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="@string/goto_next_match" />
+
+</LinearLayout>

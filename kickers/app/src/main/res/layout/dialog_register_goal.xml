@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_match_finished_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:padding="10dp"
+        tools:text="Register goal for Player 1"
+        android:textAppearance="?android:textAppearanceLarge"
+        android:textStyle="bold" />
+
+    <RadioGroup
+        android:id="@+id/rg_goal_options"
+        android:layout_width="match_parent"
+        android:padding="10dp"
+        android:layout_height="wrap_content" >
+
+        <RadioButton
+            android:id="@+id/rb_goal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/goal"
+            android:checked="true" />
+
+        <RadioButton
+            android:id="@+id/rb_own_goal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/own_goal" />
+
+        <RadioButton
+            android:id="@+id/rb_delete_goal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/delete_goal" />
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/b_register_goal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="@string/register_goal" />
+
+</LinearLayout>

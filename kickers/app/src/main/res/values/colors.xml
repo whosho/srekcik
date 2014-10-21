@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="football_field_background">#36486a</color>
+    <color name="red_team_color">#ff3c00</color>
+    <color name="blue_team_color">#0078ff</color>
+    <color name="match_info_background">#9f000000</color>
+
+
+</resources>
