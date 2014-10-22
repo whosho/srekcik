@@ -1,8 +1,8 @@
 package com.performgroup.innovation.kickers.ui.activity;
 
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBarActivity;
 import android.widget.TextView;
 
@@ -18,11 +18,9 @@ import com.performgroup.innovation.kickers.core.TeamColor;
 import com.performgroup.innovation.kickers.event.GameFinishedEvent;
 import com.performgroup.innovation.kickers.event.GoalEvent;
 import com.performgroup.innovation.kickers.event.MatchFinishedEvent;
-import com.performgroup.innovation.kickers.ui.CustomFont;
 import com.performgroup.innovation.kickers.ui.customview.BoxPoints;
-import com.performgroup.innovation.kickers.ui.customview.PlayerButtonBase;
-import com.performgroup.innovation.kickers.ui.customview.PlayerButtonBottom;
-import com.performgroup.innovation.kickers.ui.customview.PlayerButtonTop;
+import com.performgroup.innovation.kickers.ui.customview.PlayerButton;
+import com.performgroup.innovation.kickers.ui.dialog.GoalDialog;
 import com.performgroup.innovation.kickers.ui.dialog.MatchFinishedDialog;
 import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
@@ -33,10 +31,12 @@ public class MatchActivity extends ActionBarActivity {
 
     BoxPoints blueBoxPoints;
     BoxPoints redBoxPoints;
-    PlayerButtonBase tvRedAttackerName;
-    PlayerButtonBase tvRedDeffenderName;
-    PlayerButtonBase tvBlueAttackerName;
-    PlayerButtonBase tvBlueDeffenderName;
+
+    PlayerButton tvRedAttackerName;
+    PlayerButton tvRedDefenderName;
+    PlayerButton tvBlueAttackerName;
+    PlayerButton tvBlueDefenderName;
+
     TextView tvScoreRed;
     TextView tvScoreBlue;
     TextView matchInfo;
@@ -56,7 +56,7 @@ public class MatchActivity extends ActionBarActivity {
 
         KickersApplication.inject(this);
 
-        Typeface font = Typeface.createFromAsset(getAssets(), CustomFont.ORBITRON_BOLD_FONT);
+        //Typeface font = Typeface.createFromAsset(getAssets(), CustomFont.ORBITRON_BOLD_FONT);
 
         int maxGoals = gameAPI.getMaxGoals();
 
@@ -66,28 +66,22 @@ public class MatchActivity extends ActionBarActivity {
         redBoxPoints = (BoxPoints) findViewById(R.id.bp_red_points);
         redBoxPoints.setMaxPoints(maxGoals);
 
-        tvBlueAttackerName = (PlayerButtonBottom) findViewById(R.id.tv_player_blue_attacker_name);
-        tvBlueAttackerName.setListener(clickListener);
+        tvBlueAttackerName = (PlayerButton) findViewById(R.id.tv_player_blue_attacker_name);
+        tvBlueAttackerName.setPlayerClickListener(clickListener);
 
-        tvBlueDeffenderName = (PlayerButtonBottom) findViewById(R.id.tv_player_blue_deffender_name);
-        tvBlueDeffenderName.setListener(clickListener);
+        tvBlueDefenderName = (PlayerButton) findViewById(R.id.tv_player_blue_deffender_name);
+        tvBlueDefenderName.setPlayerClickListener(clickListener);
 
-        tvRedAttackerName = (PlayerButtonTop) findViewById(R.id.tv_player_red_attacker_name);
-        tvRedAttackerName.setListener(clickListener);
+        tvRedAttackerName = (PlayerButton) findViewById(R.id.tv_player_red_attacker_name);
+        tvRedAttackerName.setPlayerClickListener(clickListener);
 
-        tvRedDeffenderName = (PlayerButtonTop) findViewById(R.id.tv_player_red_deffender_name);
-        tvRedDeffenderName.setListener(clickListener);
+        tvRedDefenderName = (PlayerButton) findViewById(R.id.tv_player_red_deffender_name);
+        tvRedDefenderName.setPlayerClickListener(clickListener);
 
         tvScoreBlue = (TextView) findViewById(R.id.tv_blues_score);
-        tvScoreBlue.setTypeface(font);
-
         tvScoreRed = (TextView) findViewById(R.id.tv_reds_score);
-        tvScoreRed.setTypeface(font);
-
-        ((TextView) findViewById(R.id.tv_score_separator)).setTypeface(font);
 
         matchInfo = (TextView) findViewById(R.id.tv_match_number);
-        matchInfo.setTypeface(font);
 
         match = gameAPI.getMatch();
 
@@ -121,11 +115,11 @@ public class MatchActivity extends ActionBarActivity {
     public void updateLineups() {
         Team blue = match.lineups.getTeam(TeamColor.BLUE);
         tvBlueAttackerName.setPlayer(blue.getPlayer(PlayerRole.ATTACER));
-        tvBlueDeffenderName.setPlayer(blue.getPlayer(PlayerRole.DEFFENDER));
+        tvBlueDefenderName.setPlayer(blue.getPlayer(PlayerRole.DEFFENDER));
 
         Team red = match.lineups.getTeam(TeamColor.RED);
         tvRedAttackerName.setPlayer(red.getPlayer(PlayerRole.ATTACER));
-        tvRedDeffenderName.setPlayer(red.getPlayer(PlayerRole.DEFFENDER));
+        tvRedDefenderName.setPlayer(red.getPlayer(PlayerRole.DEFFENDER));
     }
 
     public void updateScore(MatchScore score) {
@@ -165,21 +159,19 @@ public class MatchActivity extends ActionBarActivity {
         dialog.show(getSupportFragmentManager(), "match_finished_dialog");
     }
 
-    PlayerButtonTop.OnClickListener clickListener = new PlayerButtonTop.OnClickListener() {
+    PlayerButton.OnClickListener clickListener = new PlayerButton.OnClickListener() {
 
         @Override
-        public void onRevertClicked(Player player) {
+        public void onPlayerClick(Player player, TeamColor teamColor) {
+            openGoalDialog(player, teamColor);
         }
 
-        @Override
-        public void onOwnGoalClicked(Player player) {
-            gameAPI.registerOwnGoal(player);
-        }
-
-        @Override
-        public void onNameClicked(Player player) {
-            gameAPI.registerGoal(player);
-        }
     };
+
+    private void openGoalDialog(Player player, TeamColor teamColor) {
+        GoalDialog dialog = GoalDialog.createInstance(player);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        dialog.show(fragmentManager, "goal_dialog");
+    }
 
 }

@@ -3,8 +3,9 @@
 
     <color name="football_field_background">#36486a</color>
     <color name="red_team_color">#ff3c00</color>
+    <color name="red_team_color_highlighted">#ff774d</color>
     <color name="blue_team_color">#0078ff</color>
-    <color name="match_info_background">#9f000000</color>
-
+    <color name="blue_team_color_highlighted">#4da1ff</color>
+    <color name="match_info_background">#c0000000</color>
 
 </resources>

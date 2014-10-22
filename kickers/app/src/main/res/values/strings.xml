@@ -35,5 +35,6 @@
     <string name="own_goal">Frack! Own goal :(</string>
     <string name="delete_goal">Delete last goal</string>
     <string name="register_goal">Register goal</string>
+    <string name="register_goal_title">Register goal for %1$s</string>
 
 </resources>
