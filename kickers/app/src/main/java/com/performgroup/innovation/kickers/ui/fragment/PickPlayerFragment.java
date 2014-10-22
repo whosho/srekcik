@@ -17,19 +17,16 @@ import com.performgroup.innovation.kickers.application.GameAPI;
 import com.performgroup.innovation.kickers.application.KickersApplication;
 import com.performgroup.innovation.kickers.core.Lineups;
 import com.performgroup.innovation.kickers.core.Player;
-import com.performgroup.innovation.kickers.core.PlayerRole;
-import com.performgroup.innovation.kickers.core.TeamColor;
 import com.performgroup.innovation.kickers.event.PickPlayersListUpdated;
+import com.performgroup.innovation.kickers.event.PlayerCreatedEvent;
 import com.performgroup.innovation.kickers.ui.adapter.AvailablePlayersAdapter;
 import com.performgroup.innovation.kickers.ui.adapter.ChosenPlayerAdapter;
-import com.performgroup.innovation.kickers.ui.adapter.PlayerItemView;
+import com.performgroup.innovation.kickers.ui.adapter.PlayerListItem;
 import com.performgroup.innovation.kickers.ui.dialog.CreatePlayerDialog;
 import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -40,7 +37,7 @@ public class PickPlayerFragment extends Fragment {
     private View view;
     private AvailablePlayersAdapter availableAdapter;
     private ChosenPlayerAdapter chosenAdapter;
-    private List<PlayerItemView> players;
+    private List<PlayerListItem> playersListItems;
 
     @Inject
     Bus eventBus;
@@ -56,7 +53,7 @@ public class PickPlayerFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         KickersApplication.inject(this);
-        view = inflater.inflate(R.layout.fragment_pick_players, container, true);
+        view = inflater.inflate(R.layout.fragment_pick_players, container, false);
         initViews();
         return view;
     }
@@ -120,7 +117,7 @@ public class PickPlayerFragment extends Fragment {
     private Lineups getLineups() {
         List<Player> playersList = new ArrayList<Player>();
 
-        for (PlayerItemView playerItemView : players) {
+        for (PlayerListItem playerItemView : playersListItems) {
             Player player = playerItemView.player;
             if (playerItemView.isChosen) {
                 playersList.add(player);
@@ -131,38 +128,38 @@ public class PickPlayerFragment extends Fragment {
     }
 
     private void loadContent() {
-        players = new ArrayList<PlayerItemView>();
-
-        String[] names = {
-                "Ania",
-                "Andrzej",
-                "Czarny",
-                "Dominik",
-                "Grzesiek",
-                "JakubG",
-                "Krzysiek",
-        };
-
-        for (int i = 0; i < names.length; i++) {
-            Player player = new Player(i + 1, names[i], TeamColor.UNDEFINED, PlayerRole.UNDEFINED);
-            players.add(new PlayerItemView(player));
-        }
-        updateAdapters(players);
+        List<Player> playerList = gameAPI.getAvailablePlayers();
+        updatePlayersList(playerList);
     }
 
-    private void updateAdapters(List<PlayerItemView> players) {
+    private void updatePlayersList(List<Player> playerList) {
+        playersListItems = new ArrayList<PlayerListItem>();
+        for (Player player : playerList) {
+            playersListItems.add(new PlayerListItem(player));
+        }
+
+        updateAdapters(playersListItems);
+    }
+
+    private void updateAdapters(List<PlayerListItem> players) {
         availableAdapter.updateData(players);
         chosenAdapter.updateData(players);
     }
 
     @Subscribe
+    public void onPlayerCreated(PlayerCreatedEvent event)
+    {
+        updatePlayersList(gameAPI.getAvailablePlayers());
+    }
+
+    @Subscribe
     public void onPickPlayersListUpdated(PickPlayersListUpdated event) {
-        for (PlayerItemView playerItemView : players) {
+        for (PlayerListItem playerItemView : playersListItems) {
             if (event.playerId == playerItemView.player.id) {
                 playerItemView.isChosen = event.isChosen;
             }
         }
-        updateAdapters(players);
+        updateAdapters(playersListItems);
 
         int count = chosenAdapter.getCount();
         int missingPlayersCount = MINIMAL_PLAYERS_COUNT - count;

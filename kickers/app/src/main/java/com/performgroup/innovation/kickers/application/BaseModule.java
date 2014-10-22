@@ -1,15 +1,18 @@
 package com.performgroup.innovation.kickers.application;
 
-import android.widget.ListView;
+import android.content.Context;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.performgroup.innovation.kickers.model.rules.GameRules;
 import com.performgroup.innovation.kickers.model.rules.StaticTeamGameRules;
+import com.performgroup.innovation.kickers.ui.activity.MainActivity;
 import com.performgroup.innovation.kickers.ui.activity.MatchActivity;
-import com.performgroup.innovation.kickers.ui.activity.PlayersActivity;
 import com.performgroup.innovation.kickers.ui.adapter.AvailablePlayersAdapter;
 import com.performgroup.innovation.kickers.ui.adapter.ChosenPlayerAdapter;
-import com.performgroup.innovation.kickers.ui.fragment.GameRulesDialog;
+import com.performgroup.innovation.kickers.ui.dialog.CreatePlayerDialog;
 import com.performgroup.innovation.kickers.ui.dialog.MatchFinishedDialog;
+import com.performgroup.innovation.kickers.ui.fragment.GameRulesDialog;
 import com.performgroup.innovation.kickers.ui.fragment.PickPlayerFragment;
 import com.squareup.otto.Bus;
 
@@ -24,7 +27,7 @@ import dagger.Provides;
 @Module(library = true,
         complete = false,
         injects = {
-                PlayersActivity.class,
+                MainActivity.class,
                 MatchActivity.class,
                 PickPlayerFragment.class,
                 AvailablePlayersAdapter.class,
@@ -32,23 +35,37 @@ import dagger.Provides;
                 GameAPI.class,
                 PickPlayerFragment.class,
                 MatchFinishedDialog.class,
-                GameRulesDialog.class
+                GameRulesDialog.class,
+                CreatePlayerDialog.class
         }
 )
 public class BaseModule {
 
+    Context context;
+
+    public BaseModule(Context context) {
+        this.context = context;
+    }
+
     @Singleton
     @Provides
-    public GameAPI provideMatchApi(Bus bus) {
+    public GameAPI provideMatchApi(Bus bus, Gson gson) {
         List<GameRules> gameRuleses = defineGameRules();
-        GameAPI gameAPI = new GameAPI(bus, gameRuleses);
+        GameAPI gameAPI = new GameAPI(bus, gson, context, gameRuleses);
         return gameAPI;
+    }
+
+    @Singleton
+    @Provides
+    public Gson provideGson() {
+        GsonBuilder builder = new GsonBuilder();
+        return builder.create();
     }
 
     private List<GameRules> defineGameRules() {
         List<GameRules> gameRuleses = new ArrayList<GameRules>();
-        gameRuleses.add(new StaticTeamGameRules(5,5));
-        gameRuleses.add(new StaticTeamGameRules(5,8));
+        gameRuleses.add(new StaticTeamGameRules(5, 5));
+        gameRuleses.add(new StaticTeamGameRules(5, 8));
         return gameRuleses;
     }
 
@@ -57,7 +74,6 @@ public class BaseModule {
     public Bus provideBus() {
         return new Bus();
     }
-
 
 
 }

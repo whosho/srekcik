@@ -22,21 +22,21 @@ import javax.inject.Inject;
 public class AvailablePlayersAdapter extends BaseAdapter {
 
     private Context context;
-    private List<PlayerItemView> items;
+    private List<PlayerListItem> items;
 
     @Inject
     Bus eventBus;
 
     public AvailablePlayersAdapter(Context context) {
         this.context = context;
-        items = new ArrayList<PlayerItemView>();
+        items = new ArrayList<PlayerListItem>();
 
         KickersApplication.inject(this);
     }
 
-    public void updateData(List<PlayerItemView> players) {
+    public void updateData(List<PlayerListItem> players) {
         items.clear();
-        for (PlayerItemView player : players) {
+        for (PlayerListItem player : players) {
             if (!player.isChosen) {
                 items.add(player);
             }

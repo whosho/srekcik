@@ -14,8 +14,7 @@ public class KickersApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        objectGraph = ObjectGraph.create(new BaseModule());
-
+        objectGraph = ObjectGraph.create(new BaseModule(getApplicationContext()));
     }
 
     public static void inject(Object container) {

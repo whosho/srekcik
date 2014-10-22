@@ -22,7 +22,7 @@ import javax.inject.Inject;
 public class ChosenPlayerAdapter extends BaseAdapter {
 
     private Context context;
-    private List<PlayerItemView> items;
+    private List<PlayerListItem> items;
     private LayoutInflater inflater;
 
     @Inject
@@ -31,13 +31,13 @@ public class ChosenPlayerAdapter extends BaseAdapter {
     public ChosenPlayerAdapter(Context context) {
         this.context = context;
         inflater = LayoutInflater.from(context);
-        items = new ArrayList<PlayerItemView>();
+        items = new ArrayList<PlayerListItem>();
         KickersApplication.inject(this);
     }
 
-    public void updateData(List<PlayerItemView> players) {
+    public void updateData(List<PlayerListItem> players) {
         items.clear();
-        for (PlayerItemView player : players) {
+        for (PlayerListItem player : players) {
             if (player.isChosen) {
                 items.add(player);
             }

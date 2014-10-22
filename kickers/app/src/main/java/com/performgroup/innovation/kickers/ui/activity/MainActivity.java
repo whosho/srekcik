@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
 
 import com.performgroup.innovation.kickers.R;
@@ -12,12 +13,13 @@ import com.performgroup.innovation.kickers.application.KickersApplication;
 import com.performgroup.innovation.kickers.event.GameRulesChoosenEvent;
 import com.performgroup.innovation.kickers.event.GameRulesDialogRequestedEvent;
 import com.performgroup.innovation.kickers.ui.fragment.GameRulesDialog;
+import com.performgroup.innovation.kickers.ui.fragment.PickPlayerFragment;
 import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
 
 import javax.inject.Inject;
 
-public class PlayersActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity {
 
     @Inject
     Bus eventBus;
@@ -29,6 +31,8 @@ public class PlayersActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_players);
         KickersApplication.inject(this);
+
+        loadFragmentContainer(new PickPlayerFragment());
     }
 
     @Override
@@ -64,4 +68,13 @@ public class PlayersActivity extends ActionBarActivity {
         Intent intent = new Intent(this, MatchActivity.class);
         startActivity(intent);
     }
+
+    private void loadFragmentContainer(android.support.v4.app.Fragment fragment) {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_holder, fragment);
+        transaction.commitAllowingStateLoss();
+    }
+
+
+
 }

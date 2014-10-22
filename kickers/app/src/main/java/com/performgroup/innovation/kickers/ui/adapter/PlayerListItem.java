@@ -2,16 +2,16 @@ package com.performgroup.innovation.kickers.ui.adapter;
 
 import com.performgroup.innovation.kickers.core.Player;
 
-public class PlayerItemView {
+public class PlayerListItem {
 
     public Player player;
     public boolean isChosen;
 
-    public PlayerItemView(Player player) {
+    public PlayerListItem(Player player) {
         this(player, false);
     }
 
-    public PlayerItemView(Player player, boolean isChosen) {
+    public PlayerListItem(Player player, boolean isChosen) {
         this.player = player;
         this.isChosen = isChosen;
     }
