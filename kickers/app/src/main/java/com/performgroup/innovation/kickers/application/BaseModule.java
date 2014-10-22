@@ -11,6 +11,7 @@ import com.performgroup.innovation.kickers.ui.activity.MatchActivity;
 import com.performgroup.innovation.kickers.ui.adapter.AvailablePlayersAdapter;
 import com.performgroup.innovation.kickers.ui.adapter.ChosenPlayerAdapter;
 import com.performgroup.innovation.kickers.ui.dialog.CreatePlayerDialog;
+import com.performgroup.innovation.kickers.ui.dialog.GoalDialog;
 import com.performgroup.innovation.kickers.ui.dialog.MatchFinishedDialog;
 import com.performgroup.innovation.kickers.ui.fragment.GameRulesDialog;
 import com.performgroup.innovation.kickers.ui.fragment.PickPlayerFragment;
@@ -36,7 +37,8 @@ import dagger.Provides;
                 PickPlayerFragment.class,
                 MatchFinishedDialog.class,
                 GameRulesDialog.class,
-                CreatePlayerDialog.class
+                CreatePlayerDialog.class,
+                GoalDialog.class
         }
 )
 public class BaseModule {
