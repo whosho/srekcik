@@ -2,6 +2,7 @@ package com.performgroup.innovation.kickers.ui.activity;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.support.v7.app.ActionBarActivity;
 import android.widget.TextView;
 
@@ -46,6 +47,7 @@ public class MatchActivity extends ActionBarActivity {
     Bus eventBus;
 
     private Match match;
+    private Vibrator vibrator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +90,8 @@ public class MatchActivity extends ActionBarActivity {
         matchInfo.setTypeface(font);
 
         match = gameAPI.getMatch();
+
+        vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
 
 
         updateMatchInfo();
@@ -138,6 +142,9 @@ public class MatchActivity extends ActionBarActivity {
     @Subscribe
     public void onGoal(GoalEvent event) {
         updateScore(event.score);
+        if (vibrator.hasVibrator()) {
+            vibrator.vibrate(3000);
+        }
     }
 
     @Subscribe
