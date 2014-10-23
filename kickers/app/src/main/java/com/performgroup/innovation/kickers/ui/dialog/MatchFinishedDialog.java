@@ -19,8 +19,10 @@ import com.performgroup.innovation.kickers.application.KickersApplication;
 import com.performgroup.innovation.kickers.core.MatchScore;
 import com.performgroup.innovation.kickers.core.Player;
 import com.performgroup.innovation.kickers.core.TeamColor;
+import com.performgroup.innovation.kickers.event.MatchResultConfirmedEvent;
 import com.performgroup.innovation.kickers.statistics.GameResults;
 import com.performgroup.innovation.kickers.statistics.PlayerResults;
+import com.squareup.otto.Bus;
 
 import java.util.List;
 import java.util.Map;
@@ -34,6 +36,8 @@ public class MatchFinishedDialog extends DialogFragment {
 
     @Inject
     GameAPI gameAPI;
+    @Inject
+    Bus eventBus;
 
     public MatchFinishedDialog() {
         // should be empty
@@ -74,6 +78,7 @@ public class MatchFinishedDialog extends DialogFragment {
             @Override
             public void onClick(View v) {
                 // some stuff here
+                eventBus.post(new MatchResultConfirmedEvent());
                 dismiss();
             }
         });

@@ -35,6 +35,7 @@ public class GameAPI {
     private GameRules selectedRules;
     private Lineups lineups;
     private PlayersList playersList;
+    private boolean isFinished;
 
     public GameAPI(Bus bus, Gson gson, Context context, List<GameRules> gameRuleses) {
         this.bus = bus;
@@ -65,10 +66,8 @@ public class GameAPI {
             results.registerMatchScore(match.score);
             bus.post(new MatchFinishedEvent(match.score));
             if (gameFinished) {
+                this.isFinished = true;
                 bus.post(new GameFinishedEvent(game));
-            } else {
-                game.nextMatch();
-                match = game.getMatch();
             }
         }
     }
@@ -77,7 +76,13 @@ public class GameAPI {
         game = new Game(selectedRules, lineups);
         match = getMatch();
         results = new GameResults();
+        isFinished = false;
         bus.post(new GameStartedEvent());
+    }
+
+    public void startNextMatch() {
+        game.nextMatch();
+        match = game.getMatch();
     }
 
     public Match getMatch() {
@@ -153,6 +158,10 @@ public class GameAPI {
             loadPlayersList();
         }
         return playersList.players;
+    }
+
+    public boolean isFinished() {
+        return isFinished;
     }
 }
 

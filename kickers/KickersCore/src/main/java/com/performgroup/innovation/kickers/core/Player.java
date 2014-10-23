@@ -1,11 +1,13 @@
 package com.performgroup.innovation.kickers.core;
 
-public class Player {
+import java.io.Serializable;
+
+public class Player implements Serializable {
 
     public static final Player NULL = createNullPlayer();
 
     public int id;
-    public String name;
+    public String name = "";
     public TeamColor color;
     public PlayerRole role;
 
