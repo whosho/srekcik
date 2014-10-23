@@ -18,6 +18,7 @@ import com.performgroup.innovation.kickers.core.TeamColor;
 import com.performgroup.innovation.kickers.event.GameFinishedEvent;
 import com.performgroup.innovation.kickers.event.GoalEvent;
 import com.performgroup.innovation.kickers.event.MatchFinishedEvent;
+import com.performgroup.innovation.kickers.service.SoundService;
 import com.performgroup.innovation.kickers.ui.CustomFont;
 import com.performgroup.innovation.kickers.ui.customview.BoxPoints;
 import com.performgroup.innovation.kickers.ui.customview.PlayerButtonBase;
@@ -45,6 +46,8 @@ public class MatchActivity extends ActionBarActivity {
     GameAPI gameAPI;
     @Inject
     Bus eventBus;
+    @Inject
+    SoundService player;
 
     private Match match;
     private Vibrator vibrator;
@@ -103,11 +106,16 @@ public class MatchActivity extends ActionBarActivity {
     public void onResume() {
         super.onResume();
         eventBus.register(this);
+
+        player.registerSound(R.raw.ding);
+        player.registerSound(R.raw.point);
+        player.registerSound(R.raw.tada);
     }
 
     @Override
     protected void onPause() {
         eventBus.unregister(this);
+        player.cleanSoundsBuffer();
         super.onPause();
     }
 
@@ -143,20 +151,21 @@ public class MatchActivity extends ActionBarActivity {
     public void onGoal(GoalEvent event) {
         updateScore(event.score);
         if (vibrator.hasVibrator()) {
-            vibrator.vibrate(3000);
+            vibrator.vibrate(500);
         }
+        player.play(R.raw.point);
     }
 
     @Subscribe
     public void onMatchFinished(MatchFinishedEvent event) {
-        match = gameAPI.getMatch();
+        MatchFinishedDialog dialog = new MatchFinishedDialog();
+        dialog.show(getSupportFragmentManager(), "match_finished_dialog");
 
+        match = gameAPI.getMatch();
+        player.play(R.raw.tada);
         updateMatchInfo();
         updateLineups();
         updateScore(match.score);
-
-        MatchFinishedDialog dialog = new MatchFinishedDialog();
-        dialog.show(getSupportFragmentManager(), "match_finished_dialog");
     }
 
     @Subscribe

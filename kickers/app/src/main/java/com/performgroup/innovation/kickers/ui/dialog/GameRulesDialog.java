@@ -1,4 +1,4 @@
-package com.performgroup.innovation.kickers.ui.fragment;
+package com.performgroup.innovation.kickers.ui.dialog;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -6,6 +6,7 @@ import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
@@ -43,6 +44,9 @@ public class GameRulesDialog extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.dialog_game_rules, container);
+
+        getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
+
         ListView rulesList = (ListView) view.findViewById(R.id.lv_game_rules);
         rulesAdapter = new GameRulesAdapter(getActivity(), eventBus);
         rulesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {

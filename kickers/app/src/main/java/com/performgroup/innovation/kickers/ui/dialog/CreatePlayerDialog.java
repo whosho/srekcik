@@ -1,11 +1,13 @@
 package com.performgroup.innovation.kickers.ui.dialog;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import com.performgroup.innovation.kickers.R;
@@ -38,6 +40,9 @@ public class CreatePlayerDialog extends DialogFragment {
 
     private void initView() {
         playerName = (EditText) view.findViewById(R.id.et_player_name);
+
+        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.showSoftInput(playerName, InputMethodManager.SHOW_FORCED);
 
         view.findViewById(R.id.b_save).setOnClickListener(new View.OnClickListener() {
             @Override

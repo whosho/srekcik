@@ -12,7 +12,7 @@ import com.performgroup.innovation.kickers.application.GameAPI;
 import com.performgroup.innovation.kickers.application.KickersApplication;
 import com.performgroup.innovation.kickers.event.GameRulesChoosenEvent;
 import com.performgroup.innovation.kickers.event.GameRulesDialogRequestedEvent;
-import com.performgroup.innovation.kickers.ui.fragment.GameRulesDialog;
+import com.performgroup.innovation.kickers.ui.dialog.GameRulesDialog;
 import com.performgroup.innovation.kickers.ui.fragment.PickPlayerFragment;
 import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
@@ -74,7 +74,6 @@ public class MainActivity extends ActionBarActivity {
         transaction.replace(R.id.fragment_holder, fragment);
         transaction.commitAllowingStateLoss();
     }
-
 
 
 }

@@ -11,12 +11,23 @@
         android:padding="10dp"
         android:text="@string/pick_players"
         android:textAppearance="?android:textAppearanceLarge"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:background="@color/field_green_dark"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_warning"
+        android:text="4 players needed"
+        android:gravity="center"
+        style="@style/list_header_small"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
+        android:layout_marginTop="10dp"
         android:weightSum="2">
 
         <RelativeLayout
@@ -31,7 +42,7 @@
                 android:layout_alignParentTop="true"
                 android:gravity="center"
                 android:text="@string/available_players"
-                android:textAppearance="?android:textAppearanceMedium" />
+                style="@style/list_header_small" />
 
             <Button
                 android:id="@+id/b_create_new"
@@ -63,7 +74,7 @@
                 android:layout_alignParentTop="true"
                 android:gravity="center"
                 android:text="@string/chosen_players"
-                android:textAppearance="?android:textAppearanceMedium" />
+                style="@style/list_header_small" />
 
             <Button
                 android:id="@+id/b_play"
@@ -79,13 +90,6 @@
                 android:layout_above="@id/b_play"
                 android:layout_below="@id/tv_chosen" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/tv_warning"
-                android:text="4 players needed"
-                android:layout_alignTop="@id/lv_chosen_players"
-                android:gravity="center"/>
 
         </RelativeLayout>
 

@@ -68,16 +68,6 @@ public class AvailablePlayersAdapter extends BaseAdapter {
 
             viewHolder = new ViewHolder();
             viewHolder.name = (TextView) convertView.findViewById(R.id.tv_name);
-
-            viewHolder.button = (ImageButton) convertView.findViewById(R.id.ib_add_button);
-            viewHolder.button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int playerId = items.get(position).player.id;
-                    eventBus.post(new PickPlayersListUpdated(playerId, true));
-                }
-            });
-
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
@@ -91,7 +81,6 @@ public class AvailablePlayersAdapter extends BaseAdapter {
 
     static class ViewHolder {
         TextView name;
-        ImageButton button;
     }
 
 }

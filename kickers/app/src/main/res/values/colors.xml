@@ -5,6 +5,8 @@
     <color name="red_team_color">#ff3c00</color>
     <color name="blue_team_color">#0078ff</color>
     <color name="match_info_background">#9f000000</color>
+    <color name="field_green_dark">#ff4f9d28</color>
+    <color name="field_green">#ffcfffe0</color>
 
 
 </resources>

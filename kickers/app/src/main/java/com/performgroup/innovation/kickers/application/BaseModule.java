@@ -1,18 +1,21 @@
 package com.performgroup.innovation.kickers.application;
 
 import android.content.Context;
+import android.media.AudioManager;
+import android.media.SoundPool;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.performgroup.innovation.kickers.model.rules.GameRules;
 import com.performgroup.innovation.kickers.model.rules.StaticTeamGameRules;
+import com.performgroup.innovation.kickers.service.SoundService;
 import com.performgroup.innovation.kickers.ui.activity.MainActivity;
 import com.performgroup.innovation.kickers.ui.activity.MatchActivity;
 import com.performgroup.innovation.kickers.ui.adapter.AvailablePlayersAdapter;
 import com.performgroup.innovation.kickers.ui.adapter.ChosenPlayerAdapter;
 import com.performgroup.innovation.kickers.ui.dialog.CreatePlayerDialog;
+import com.performgroup.innovation.kickers.ui.dialog.GameRulesDialog;
 import com.performgroup.innovation.kickers.ui.dialog.MatchFinishedDialog;
-import com.performgroup.innovation.kickers.ui.fragment.GameRulesDialog;
 import com.performgroup.innovation.kickers.ui.fragment.PickPlayerFragment;
 import com.squareup.otto.Bus;
 
@@ -53,6 +56,13 @@ public class BaseModule {
         List<GameRules> gameRuleses = defineGameRules();
         GameAPI gameAPI = new GameAPI(bus, gson, context, gameRuleses);
         return gameAPI;
+    }
+
+    @Singleton
+    @Provides
+    public SoundService provideSoundService() {
+        SoundPool soundPool = new SoundPool(3, AudioManager.STREAM_MUSIC, 100);
+        return new SoundService(soundPool, context);
     }
 
     @Singleton
