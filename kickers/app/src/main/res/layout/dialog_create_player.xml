@@ -2,13 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="8dp"
     android:orientation="vertical">
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/team"
-        android:layout_gravity="center"/>
 
     <TextView
         android:id="@+id/tv_match_finished_title"
@@ -20,24 +15,28 @@
         android:textAppearance="?android:textAppearanceLarge"
         android:textStyle="bold" />
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@drawable/team" />
+
     <EditText
         android:id="@+id/et_player_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:hint="@string/player_name"
-        android:inputType="textPersonName"
         android:focusable="true"
         android:focusableInTouchMode="true"
-        />
+        android:hint="@string/player_name"
+        android:inputType="textPersonName" />
 
     <Button
         android:id="@+id/b_save"
+        style="@style/normal_button_style"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:text="@string/save_player"
         android:layout_gravity="center"
-        />
+        android:text="@string/save_player" />
 
 </LinearLayout>
