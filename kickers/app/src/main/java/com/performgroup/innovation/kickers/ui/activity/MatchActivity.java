@@ -19,6 +19,7 @@ import com.performgroup.innovation.kickers.event.GameFinishedEvent;
 import com.performgroup.innovation.kickers.event.GoalEvent;
 import com.performgroup.innovation.kickers.event.MatchFinishedEvent;
 import com.performgroup.innovation.kickers.event.MatchResultConfirmedEvent;
+import com.performgroup.innovation.kickers.event.MatchStartedEvent;
 import com.performgroup.innovation.kickers.service.SoundService;
 import com.performgroup.innovation.kickers.ui.customview.BoxPoints;
 import com.performgroup.innovation.kickers.ui.customview.PlayerButton;
@@ -87,20 +88,15 @@ public class MatchActivity extends ActionBarActivity {
 
         matchInfo = (TextView) findViewById(R.id.tv_match_number);
 
-        match = gameAPI.getMatch();
-
         vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
 
-
-        updateMatchInfo();
-        updateLineups();
-        updateScore(match.score);
     }
 
     @Override
     public void onResume() {
         super.onResume();
         eventBus.register(this);
+        gameAPI.startMatch();
 
         player.registerSound(R.raw.ding);
         player.registerSound(R.raw.point);
@@ -155,7 +151,6 @@ public class MatchActivity extends ActionBarActivity {
         MatchFinishedDialog dialog = new MatchFinishedDialog();
         dialog.show(getSupportFragmentManager(), "match_finished_dialog");
 
-        match = gameAPI.getMatch();
         player.play(R.raw.tada);
         updateMatchInfo();
         updateLineups();
@@ -164,11 +159,16 @@ public class MatchActivity extends ActionBarActivity {
 
     @Subscribe
     public void onMatchResultConfirmedEvent(MatchResultConfirmedEvent event) {
-
         if (gameAPI.isFinished()) {
             finish();
+        } else {
+            gameAPI.startNextMatch();
         }
-        gameAPI.startNextMatch();
+    }
+
+    @Subscribe
+    public void onMatchStartedEvent(MatchStartedEvent event) {
+        match = event.newMatch;
         updateMatchInfo();
         updateLineups();
         updateScore(match.score);

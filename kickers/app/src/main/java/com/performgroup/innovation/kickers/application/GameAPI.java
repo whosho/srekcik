@@ -14,6 +14,7 @@ import com.performgroup.innovation.kickers.event.GameRulesDialogRequestedEvent;
 import com.performgroup.innovation.kickers.event.GameStartedEvent;
 import com.performgroup.innovation.kickers.event.GoalEvent;
 import com.performgroup.innovation.kickers.event.MatchFinishedEvent;
+import com.performgroup.innovation.kickers.event.MatchStartedEvent;
 import com.performgroup.innovation.kickers.event.PlayerCreatedEvent;
 import com.performgroup.innovation.kickers.model.Game;
 import com.performgroup.innovation.kickers.model.PlayersList;
@@ -35,7 +36,7 @@ public class GameAPI {
     private GameRules selectedRules;
     private Lineups lineups;
     private PlayersList playersList;
-    private boolean isFinished;
+
 
     public GameAPI(Bus bus, Gson gson, Context context, List<GameRules> gameRuleses) {
         this.bus = bus;
@@ -66,7 +67,6 @@ public class GameAPI {
             results.registerMatchScore(match.score);
             bus.post(new MatchFinishedEvent(match.score));
             if (gameFinished) {
-                this.isFinished = true;
                 bus.post(new GameFinishedEvent(game));
             }
         }
@@ -74,19 +74,15 @@ public class GameAPI {
 
     public void startNewGame() {
         game = new Game(selectedRules, lineups);
-        match = getMatch();
+        match = game.getMatch();
         results = new GameResults();
-        isFinished = false;
         bus.post(new GameStartedEvent());
     }
 
     public void startNextMatch() {
         game.nextMatch();
         match = game.getMatch();
-    }
-
-    public Match getMatch() {
-        return game.getMatch();
+        startMatch();
     }
 
     public GameResults getResults() {
@@ -161,7 +157,14 @@ public class GameAPI {
     }
 
     public boolean isFinished() {
-        return isFinished;
+        return game.isFinished();
+    }
+
+    public void startMatch() {
+        if (!game.isStarted()) {
+            match = game.start();
+        }
+        bus.post(new MatchStartedEvent(match));
     }
 }
 

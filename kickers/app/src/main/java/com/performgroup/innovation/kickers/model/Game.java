@@ -10,6 +10,7 @@ import java.util.List;
 
 public class Game {
 
+    private boolean isStarted;
     GameRules rules;
     List<Match> matches;
 
@@ -17,6 +18,7 @@ public class Game {
         this.rules = rules;
         matches = new ArrayList<Match>();
         matches.add(new Match(initialiLineups, matches.size()));
+        isStarted = false;
     }
 
     public void nextMatch() {
@@ -86,4 +88,12 @@ public class Game {
         return stats;
     }
 
+    public boolean isStarted() {
+        return isStarted;
+    }
+
+    public Match start() {
+        isStarted = true;
+        return getMatch();
+    }
 }
