@@ -25,7 +25,6 @@ import com.performgroup.innovation.kickers.statistics.PlayerResults;
 import com.squareup.otto.Bus;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -33,6 +32,7 @@ public class MatchFinishedDialog extends DialogFragment {
 
     private View view;
     private GameResults results;
+    private Context context;
 
     @Inject
     GameAPI gameAPI;
@@ -47,6 +47,7 @@ public class MatchFinishedDialog extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.dialog_match_finished, container);
+        context = getActivity();
 
         getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
 
@@ -61,18 +62,16 @@ public class MatchFinishedDialog extends DialogFragment {
     private void initView() {
         TeamColor winner = results.getWinner();
 
-        Map<Integer, PlayerResults> playerStatistics = results.playerStatistics;
+        List<PlayerResults> playerResults = results.getSortedPlayerGoalBalance();
         List<MatchScore> matchScores = results.matchesScore;
 
         MatchScore score = matchScores.get(matchScores.size() - 1);
 
-        String title = (winner == TeamColor.BLUE ? getString(R.string.blue_team_wins) : getString(R.string.red_team_wins));
-
-        ((TextView) view.findViewById(R.id.tv_match_finished_title)).setText(title);
         ((TextView) view.findViewById(R.id.tv_red_points)).setText(score.redsPoints + "");
         ((TextView) view.findViewById(R.id.tv_blue_points)).setText(score.bluesPoints + "");
 
-        drawMatchResults(playerStatistics);
+        drawMatchHistory(matchScores, gameAPI.getNumberOfMatches());
+        drawPlayerStatistics(playerResults);
 
         view.findViewById(R.id.b_goto_next_match).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,75 +83,75 @@ public class MatchFinishedDialog extends DialogFragment {
         });
     }
 
-    private void drawMatchResults(Map<Integer, PlayerResults> playerStatistics) {
-        TableLayout matchResultsTable = (TableLayout) view.findViewById(R.id.tl_match_history);
+    private void drawMatchHistory(List<MatchScore> matchScores, int numberOfMatches) {
+        TableLayout table = (TableLayout) view.findViewById(R.id.tl_match_history);
 
-        TableRow matchesIndex = getIndexRow();
-        matchResultsTable.addView(matchesIndex, new TableLayout.LayoutParams());
+        TableRow titleRow = new TableRow(context);
+        addTableColumn(titleRow, "");
+        for (int i = 1; i <= numberOfMatches; i++) {
+            addBoldTableColumn(titleRow, i + "");
+        }
+        addBoldTableColumn(titleRow, getString(R.string.total_matches));
+        table.addView(titleRow, new TableLayout.LayoutParams());
 
-        for (Map.Entry<Integer, PlayerResults> entry : playerStatistics.entrySet()) {
-            TableRow playerRow = getPlayerRow(entry.getValue());
-            matchResultsTable.addView(playerRow, new TableLayout.LayoutParams());
+        TableRow teamRow1 = new TableRow(context);
+        addBoldTableColumn(teamRow1, "team1");
+        for (MatchScore matchScore : matchScores) {
+            addTableColumn(teamRow1, matchScore.bluesPoints + "");
+        }
+        table.addView(teamRow1, new TableLayout.LayoutParams());
+
+        TableRow teamRow2 = new TableRow(context);
+        addBoldTableColumn(teamRow2, "team2");
+        for (MatchScore matchScore : matchScores) {
+            addTableColumn(teamRow2, matchScore.redsPoints + "");
+        }
+        table.addView(teamRow2, new TableLayout.LayoutParams());
+    }
+
+
+    private void drawPlayerStatistics(List<PlayerResults> playerResults) {
+        TableLayout table = (TableLayout) view.findViewById(R.id.tl_players_statistics);
+
+        TableRow titleRow = new TableRow(context);
+        addTableColumn(titleRow, "");
+        addBoldTableColumn(titleRow, getString(R.string.goals));
+        addBoldTableColumn(titleRow, getString(R.string.own_goals));
+        addBoldTableColumn(titleRow, getString(R.string.goals_balance));
+
+        table.addView(titleRow, new TableLayout.LayoutParams());
+
+        for (PlayerResults item : playerResults) {
+            Player player = item.player;
+
+            TableRow row = new TableRow(context);
+            addBoldTableColumn(row, player.name + "");
+            addTableColumn(row, item.totalGoals + "");
+            addTableColumn(row, item.totalOwnGoals + "");
+            addBoldTableColumn(row, item.goalBalance + "");
+            table.addView(row, new TableLayout.LayoutParams());
         }
     }
 
-    private TableRow getIndexRow() {
-        Context context = getActivity();
-        TableRow row = new TableRow(context);
-
-        TextView emptyColumn = new TextView(context);
-        emptyColumn.setText("");
-        row.addView(emptyColumn);
-
-        TextView goalTitleColumn = new TextView(context);
-        setCommonPadding(goalTitleColumn);
-        goalTitleColumn.setText(getString(R.string.goals));
-        goalTitleColumn.setTypeface(null, Typeface.BOLD);
-        row.addView(goalTitleColumn);
-
-        TextView ownGoalTitleColumn = new TextView(context);
-        setCommonPadding(ownGoalTitleColumn);
-        ownGoalTitleColumn.setText(getString(R.string.own_goals));
-        ownGoalTitleColumn.setTypeface(null, Typeface.BOLD);
-        row.addView(ownGoalTitleColumn);
-
-        return row;
+    private void addTableColumn(TableRow row, String text) {
+        TextView column = new TextView(context);
+        column.setText(text);
+        column.setTextColor(Color.WHITE);
+        setCommonPadding(column);
+        row.addView(column);
     }
 
-    private TableRow getPlayerRow(PlayerResults playerResults) {
-        Context context = getActivity();
-        TableRow row = new TableRow(context);
-
-        Player player = playerResults.player;
-        int colorId = (player.color == TeamColor.BLUE ? R.color.blue_team_color : R.color.red_team_color);
-
-        TextView teamColumn = new TextView(context);
-        teamColumn.setText(player.name + "");
-        teamColumn.setTextColor(Color.WHITE);
-        teamColumn.setBackgroundResource(colorId);
-        setCommonPadding(teamColumn);
-        row.addView(teamColumn);
-
-        int goals = playerResults.goalsAsAttacker + playerResults.goalsAsDefender;
-        int ownGoals = playerResults.ownGoalsAsAttacker + playerResults.ownGoalsAsDefender;
-
-        TextView goalsColumn = new TextView(context);
-        goalsColumn.setText(goals + "");
-        goalsColumn.setTextColor(Color.BLACK);
-        setCommonPadding(goalsColumn);
-        row.addView(goalsColumn);
-
-        TextView onwGoalsColumn = new TextView(context);
-        onwGoalsColumn.setText(ownGoals + "");
-        onwGoalsColumn.setTextColor(Color.BLACK);
-        setCommonPadding(onwGoalsColumn);
-        row.addView(onwGoalsColumn);
-
-        return row;
+    private void addBoldTableColumn(TableRow row, String text) {
+        TextView column = new TextView(context);
+        column.setText(text);
+        column.setTypeface(null, Typeface.BOLD);
+        column.setTextColor(Color.WHITE);
+        setCommonPadding(column);
+        row.addView(column);
     }
 
     private void setCommonPadding(TextView textView) {
-        textView.setPadding(15, 5, 15, 5);
+        textView.setPadding(15, 2, 15, 2);
     }
 
 }

@@ -5,10 +5,16 @@ import com.performgroup.innovation.kickers.core.PlayerRole;
 
 public class PlayerResults {
     public Player player;
+
     public int goalsAsAttacker;
-    public int ownGoalsAsAttacker;
     public int goalsAsDefender;
+
+    public int ownGoalsAsAttacker;
     public int ownGoalsAsDefender;
+
+    public int totalGoals;
+    public int totalOwnGoals;
+    public int goalBalance;
 
     public void addGoal(PlayerRole playerRole, boolean isOwnGoal) {
         if (isOwnGoal) {
@@ -18,6 +24,10 @@ public class PlayerResults {
             if (playerRole.equals(PlayerRole.ATTACER)) goalsAsAttacker++;
             if (playerRole.equals(PlayerRole.DEFFENDER)) goalsAsDefender++;
         }
+
+        totalGoals = goalsAsAttacker + goalsAsDefender;
+        totalOwnGoals = ownGoalsAsAttacker + ownGoalsAsDefender;
+        goalBalance = totalGoals - totalOwnGoals;
     }
 
     public static PlayerResults createFor(Player player) {

@@ -7,27 +7,27 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/field_green_dark"
         android:gravity="center"
         android:padding="10dp"
         android:text="@string/pick_players"
         android:textAppearance="?android:textAppearanceLarge"
-        android:textStyle="bold"
-        android:background="@color/field_green_dark"
-        />
+        android:textColor="@android:color/white"
+        android:textStyle="bold" />
 
     <TextView
+        android:id="@+id/tv_warning"
+        style="@style/list_header_small"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tv_warning"
-        android:text="4 players needed"
         android:gravity="center"
-        style="@style/list_header_small"/>
+        android:text="4 players needed" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
         android:layout_marginTop="10dp"
+        android:orientation="horizontal"
         android:weightSum="2">
 
         <RelativeLayout
@@ -37,15 +37,16 @@
 
             <TextView
                 android:id="@+id/tv_available"
+                style="@style/list_header_small"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:gravity="center"
-                android:text="@string/available_players"
-                style="@style/list_header_small" />
+                android:text="@string/available_players" />
 
             <Button
                 android:id="@+id/b_create_new"
+                style="@style/normal_button_style"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
@@ -69,15 +70,16 @@
 
             <TextView
                 android:id="@+id/tv_chosen"
+                style="@style/list_header_small"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:gravity="center"
-                android:text="@string/chosen_players"
-                style="@style/list_header_small" />
+                android:text="@string/chosen_players" />
 
             <Button
                 android:id="@+id/b_play"
+                style="@style/normal_button_style"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
