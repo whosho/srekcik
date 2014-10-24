@@ -49,14 +49,14 @@ public class GameAPI {
     public void registerOwnGoal(Player player) {
         match.onOwnGoal(player.color);
         results.registerGoal(player, true);
-        bus.post(new GoalEvent(player.color, match.score));
+        bus.post(new GoalEvent(player.color, match.score, true));
         validateMatchEnd();
     }
 
     public void registerGoal(Player player) {
         match.onGoal(player.color);
         results.registerGoal(player, false);
-        bus.post(new GoalEvent(player.color, match.score));
+        bus.post(new GoalEvent(player.color, match.score, false));
         validateMatchEnd();
     }
 

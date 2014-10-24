@@ -96,11 +96,15 @@ public class MatchActivity extends ActionBarActivity {
     public void onResume() {
         super.onResume();
         eventBus.register(this);
-        gameAPI.startMatch();
 
+        player.registerSound(R.raw.crowd_quiet);
         player.registerSound(R.raw.ding);
         player.registerSound(R.raw.point);
         player.registerSound(R.raw.tada);
+        player.registerSound(R.raw.applause);
+        player.registerSound(R.raw.boooo);
+
+        gameAPI.startMatch();
     }
 
     @Override
@@ -144,6 +148,9 @@ public class MatchActivity extends ActionBarActivity {
         if (vibrator.hasVibrator()) {
             vibrator.vibrate(100);
         }
+
+        player.play(event.isOwnGoal ? R.raw.boooo : R.raw.applause);
+
     }
 
     @Subscribe
@@ -151,10 +158,10 @@ public class MatchActivity extends ActionBarActivity {
         MatchFinishedDialog dialog = new MatchFinishedDialog();
         dialog.show(getSupportFragmentManager(), "match_finished_dialog");
 
-        player.play(R.raw.tada);
         updateMatchInfo();
         updateLineups();
         updateScore(match.score);
+        player.stop(R.raw.crowd_quiet);
     }
 
     @Subscribe
@@ -172,6 +179,7 @@ public class MatchActivity extends ActionBarActivity {
         updateMatchInfo();
         updateLineups();
         updateScore(match.score);
+        player.play(R.raw.crowd_quiet, true);
     }
 
 

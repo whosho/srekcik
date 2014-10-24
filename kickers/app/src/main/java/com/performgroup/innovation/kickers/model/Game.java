@@ -25,11 +25,11 @@ public class Game {
         Match currentMatch = getMatch();
         Lineups lineups = currentMatch.lineups;
 
-        if (rules.shuffleTeamColors()) {
+        if (rules.shuffleTeamColors) {
             lineups.shuffleTeamColors();
         }
 
-        if (rules.shufflePositions()) {
+        if (rules.shufflePositions) {
             lineups.shufflePositions(((int) (Math.random() * 2) % 2));
         }
 
@@ -58,7 +58,7 @@ public class Game {
     }
 
     public int getMaxGoals() {
-        return rules.getMaxGoals();
+        return rules.maxGoals;
     }
 
     public List<Integer> getBlueMatchStats() {

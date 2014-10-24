@@ -8,9 +8,11 @@ public class GoalEvent {
     public TeamColor teamColor;
     public Player player;
     public MatchScore score;
+    public boolean isOwnGoal;
 
-    public GoalEvent(TeamColor teamColor, MatchScore score) {
+    public GoalEvent(TeamColor teamColor, MatchScore score, boolean isOwnGoal) {
         this.teamColor = teamColor;
         this.score = score;
+        this.isOwnGoal = isOwnGoal;
     }
 }

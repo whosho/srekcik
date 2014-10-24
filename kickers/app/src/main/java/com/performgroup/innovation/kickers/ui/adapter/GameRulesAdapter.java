@@ -6,11 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.performgroup.innovation.kickers.R;
-import com.performgroup.innovation.kickers.event.GameRulesChoosenEvent;
 import com.performgroup.innovation.kickers.model.rules.GameRules;
 import com.squareup.otto.Bus;
 
@@ -57,7 +55,7 @@ public class GameRulesAdapter extends BaseAdapter {
             viewHolder = (GameRulesItemViewHolder) convertView.getTag();
         }
 
-        viewHolder.ruleName.setText(rulesList.get(position).getName());
+        viewHolder.ruleName.setText(rulesList.get(position).name);
         return convertView;
 
     }

@@ -2,20 +2,31 @@ package com.performgroup.innovation.kickers.model.rules;
 
 import com.performgroup.innovation.kickers.model.Game;
 
-public interface GameRules {
+public class GameRules {
+    private PointLimitMatchRules pointLimitMatchRules;
+    public String name;
+    private int maxMatchesCount = 5;
+    public int maxGoals;
+    public boolean shufflePositions;
+    public boolean shuffleTeamColors;
 
-    boolean isLastMatch(Game game);
+    public GameRules(String name, int maxMatches, int maxGoals) {
+        this.name = name;
+        this.maxMatchesCount = maxMatches;
+        this.maxGoals = maxGoals;
+        pointLimitMatchRules = new PointLimitMatchRules(maxGoals);
+    }
 
-    boolean shufflePositions();
+    public boolean isLastMatch(Game game) {
+        return game.getMatchesCount() == maxMatchesCount;
+    }
 
-    boolean shuffleTeamColors();
+    public MatchRules getMatchRules() {
+        return pointLimitMatchRules;
+    }
 
-    MatchRules getMatchRules();
-
-    int getNumberOfMatches();
-
-    public int getMaxGoals();
-
-    String getName();
+    public int getNumberOfMatches() {
+        return maxMatchesCount;
+    }
 
 }

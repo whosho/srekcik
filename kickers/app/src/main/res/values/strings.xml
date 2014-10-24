@@ -36,5 +36,8 @@
     <string name="delete_goal">Delete last goal</string>
     <string name="register_goal">Register goal</string>
     <string name="register_goal_title">Register goal for %1$s</string>
+    <string name="game_name_exhibition_match">Mecz towarzyski</string>
+    <string name="game_name_sparring">Sparing</string>
+    <string name="game_name_three_wins">Do trzech zwycięstw</string>
 
 </resources>

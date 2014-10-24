@@ -6,8 +6,8 @@ import android.media.SoundPool;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.performgroup.innovation.kickers.R;
 import com.performgroup.innovation.kickers.model.rules.GameRules;
-import com.performgroup.innovation.kickers.model.rules.StaticTeamGameRules;
 import com.performgroup.innovation.kickers.service.SoundService;
 import com.performgroup.innovation.kickers.ui.activity.MainActivity;
 import com.performgroup.innovation.kickers.ui.activity.MatchActivity;
@@ -63,7 +63,7 @@ public class BaseModule {
     @Singleton
     @Provides
     public SoundService provideSoundService() {
-        SoundPool soundPool = new SoundPool(3, AudioManager.STREAM_MUSIC, 100);
+        SoundPool soundPool = new SoundPool(4, AudioManager.STREAM_MUSIC, 0);
         return new SoundService(soundPool, context);
     }
 
@@ -76,9 +76,15 @@ public class BaseModule {
 
     private List<GameRules> defineGameRules() {
         List<GameRules> gameRuleses = new ArrayList<GameRules>();
-        gameRuleses.add(new StaticTeamGameRules(5, 5));
-        gameRuleses.add(new StaticTeamGameRules(5, 8));
+        gameRuleses.add(new GameRules(getString(R.string.game_name_exhibition_match) + " 5 po 5", 5, 5));
+        gameRuleses.add(new GameRules(getString(R.string.game_name_exhibition_match) + " 5 do 8", 5, 8));
+        //    gameRuleses.add(new GameRules(getString(R.string.game_name_three_wins), 5, 8));
+        //  gameRuleses.add(new GameRules(getString(R.string.game_name_sparring), 5, 8));
         return gameRuleses;
+    }
+
+    private String getString(int stringID) {
+        return context.getString(stringID);
     }
 
     @Singleton

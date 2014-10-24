@@ -32,14 +32,26 @@ public class SoundService {
         sounds.clear();
     }
 
-    public void play(int soundResourceID) throws UnregisteredSoundException {
+    public void play(int soundResourceID) {
+        play(soundResourceID, false);
+    }
+
+    public void play(int soundResourceID, boolean repeat) throws UnregisteredSoundException {
         if (sounds.containsKey(soundResourceID)) {
             Integer soundID = sounds.get(soundResourceID);
-            player.play(soundID, 1.0f, 1.0f, 1, 0, 1f);
-        }else
-        {
+            playSound(soundID, repeat);
+        } else {
             throw new UnregisteredSoundException();
         }
+    }
+
+    private void playSound(Integer soundID, boolean repeat) {
+        player.play(soundID, 1.0f, 1.0f, 1, repeat ? 1 : 0, 1f);
+    }
+
+
+    public void stop(int soundResourceID) {
+        player.stop(soundResourceID);
     }
 
     private class UnregisteredSoundException extends RuntimeException {
