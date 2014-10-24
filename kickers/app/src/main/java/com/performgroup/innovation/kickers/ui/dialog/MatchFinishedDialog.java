@@ -18,7 +18,7 @@ import com.performgroup.innovation.kickers.application.GameAPI;
 import com.performgroup.innovation.kickers.application.KickersApplication;
 import com.performgroup.innovation.kickers.core.MatchScore;
 import com.performgroup.innovation.kickers.core.Player;
-import com.performgroup.innovation.kickers.core.TeamColor;
+import com.performgroup.innovation.kickers.core.Team;
 import com.performgroup.innovation.kickers.event.MatchResultConfirmedEvent;
 import com.performgroup.innovation.kickers.statistics.GameResults;
 import com.performgroup.innovation.kickers.statistics.PlayerResults;
@@ -60,18 +60,20 @@ public class MatchFinishedDialog extends DialogFragment {
     }
 
     private void initView() {
-        TeamColor winner = results.getWinner();
-
-        List<PlayerResults> playerResults = results.getSortedPlayerGoalBalance();
         List<MatchScore> matchScores = results.matchesScore;
+        MatchScore lastScore = matchScores.get(matchScores.size() - 1);
 
-        MatchScore score = matchScores.get(matchScores.size() - 1);
+        int currentMatchNumber = gameAPI.getMatchesCount();
+        int numberOfMatches = gameAPI.getNumberOfMatches();
 
-        ((TextView) view.findViewById(R.id.tv_red_points)).setText(score.redsPoints + "");
-        ((TextView) view.findViewById(R.id.tv_blue_points)).setText(score.bluesPoints + "");
+        String title = getString(R.string.match_statistics_title, currentMatchNumber, numberOfMatches);
 
-        drawMatchHistory(matchScores, gameAPI.getNumberOfMatches());
-        drawPlayerStatistics(playerResults);
+        ((TextView) view.findViewById(R.id.tv_match_finished_title)).setText(title);
+        ((TextView) view.findViewById(R.id.tv_red_points)).setText(lastScore.redsPoints + "");
+        ((TextView) view.findViewById(R.id.tv_blue_points)).setText(lastScore.bluesPoints + "");
+
+        drawMatchHistory(numberOfMatches);
+        drawPlayerStatistics();
 
         view.findViewById(R.id.b_goto_next_match).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,7 +85,9 @@ public class MatchFinishedDialog extends DialogFragment {
         });
     }
 
-    private void drawMatchHistory(List<MatchScore> matchScores, int numberOfMatches) {
+    private void drawMatchHistory(int numberOfMatches) {
+        List<Team> teams = results.lineups.teams;
+
         TableLayout table = (TableLayout) view.findViewById(R.id.tl_match_history);
 
         TableRow titleRow = new TableRow(context);
@@ -91,26 +95,35 @@ public class MatchFinishedDialog extends DialogFragment {
         for (int i = 1; i <= numberOfMatches; i++) {
             addBoldTableColumn(titleRow, i + "");
         }
-        addBoldTableColumn(titleRow, getString(R.string.total_matches));
+        addBoldTableColumn(titleRow, getString(R.string.matches_won));
         table.addView(titleRow, new TableLayout.LayoutParams());
 
-        TableRow teamRow1 = new TableRow(context);
-        addBoldTableColumn(teamRow1, "team1");
-        for (MatchScore matchScore : matchScores) {
-            addTableColumn(teamRow1, matchScore.bluesPoints + "");
-        }
-        table.addView(teamRow1, new TableLayout.LayoutParams());
+        for (Team team : teams) {
+            TableRow row = new TableRow(context);
+            String playerName1 = team.players.get(0).name;
+            String playerName2 = team.players.get(1).name;
 
-        TableRow teamRow2 = new TableRow(context);
-        addBoldTableColumn(teamRow2, "team2");
-        for (MatchScore matchScore : matchScores) {
-            addTableColumn(teamRow2, matchScore.redsPoints + "");
+            addBoldTableColumn(row, playerName1 + " / " + playerName2);
+
+            for (int i = 0; i < numberOfMatches; i++) {
+                List<Integer> teamScores = team.scores;
+                if (i < teamScores.size()) {
+                    addTableColumn(row, teamScores.get(i) + "");
+                } else {
+                    addTableColumn(row, "");
+                }
+            }
+            addBoldTableColumn(row, team.wins + "");
+
+            table.addView(row, new TableLayout.LayoutParams());
         }
-        table.addView(teamRow2, new TableLayout.LayoutParams());
+
     }
 
 
-    private void drawPlayerStatistics(List<PlayerResults> playerResults) {
+    private void drawPlayerStatistics() {
+        List<PlayerResults> playerResults = results.getSortedPlayerGoalBalance();
+
         TableLayout table = (TableLayout) view.findViewById(R.id.tl_players_statistics);
 
         TableRow titleRow = new TableRow(context);

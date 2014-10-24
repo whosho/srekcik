@@ -15,13 +15,12 @@
         android:paddingBottom="10dp"
         android:textAppearance="?android:textAppearanceLarge"
         android:textColor="@android:color/white"
-        android:textStyle="bold"
-        android:text="@string/match_statistics" />
-
+        android:textStyle="bold" />
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingBottom="5dp">
 
         <TextView
             android:id="@+id/tv_separator"
@@ -69,7 +68,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:padding="5dp" />
+            android:paddingBottom="5dp" />
 
     </RelativeLayout>
 
@@ -83,7 +82,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:padding="5dp" />
+            android:paddingBottom="5dp" />
 
     </RelativeLayout>
 

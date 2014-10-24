@@ -6,8 +6,10 @@ import android.content.SharedPreferences;
 import com.google.gson.Gson;
 import com.performgroup.innovation.kickers.core.Lineups;
 import com.performgroup.innovation.kickers.core.Match;
+import com.performgroup.innovation.kickers.core.MatchScore;
 import com.performgroup.innovation.kickers.core.Player;
 import com.performgroup.innovation.kickers.core.PlayerRole;
+import com.performgroup.innovation.kickers.core.Team;
 import com.performgroup.innovation.kickers.core.TeamColor;
 import com.performgroup.innovation.kickers.event.GameFinishedEvent;
 import com.performgroup.innovation.kickers.event.GameRulesDialogRequestedEvent;
@@ -61,11 +63,13 @@ public class GameAPI {
     }
 
     private void validateMatchEnd() {
-        boolean matchFinished = game.isMatchFinished(match.score);
+        MatchScore score = match.score;
+        boolean matchFinished = game.isMatchFinished(score);
         boolean gameFinished = game.isFinished();
         if (matchFinished) {
-            results.registerMatchScore(match.score);
-            bus.post(new MatchFinishedEvent(match.score));
+            results.registerMatchScore(score);
+            bus.post(new MatchFinishedEvent(score));
+
             if (gameFinished) {
                 bus.post(new GameFinishedEvent(game));
             }
@@ -76,6 +80,7 @@ public class GameAPI {
         game = new Game(selectedRules, lineups);
         match = game.getMatch();
         results = new GameResults();
+        results.lineups = lineups;
         bus.post(new GameStartedEvent());
     }
 
@@ -87,16 +92,6 @@ public class GameAPI {
 
     public GameResults getResults() {
         return results;
-    }
-
-    public String getShortStatisticsText() {
-        String result = "WINNER: " + results.getWinner().name() + "\n\n";
-        result += "BLUES : " + results.blueWins + "\n";
-        result += "REDS : " + results.redsWins + "\n\n";
-
-        result += game.getMatchStats();
-
-        return result;
     }
 
     public int getMatchesCount() {
@@ -129,11 +124,11 @@ public class GameAPI {
 
     public void loadPlayersList() {
         SharedPreferences preferences = context.getSharedPreferences("kickers", Context.MODE_PRIVATE);
-        String plyersListFile = preferences.getString(TAG_PLAYERS_LIST, "");
-        if (plyersListFile.isEmpty()) {
+        String playersListFile = preferences.getString(TAG_PLAYERS_LIST, "");
+        if (playersListFile.isEmpty()) {
             playersList = new PlayersList();
         } else {
-            playersList = gson.fromJson(plyersListFile, PlayersList.class);
+            playersList = gson.fromJson(playersListFile, PlayersList.class);
         }
     }
 

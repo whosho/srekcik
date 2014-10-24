@@ -11,6 +11,8 @@ public class Team {
 
     public TeamColor color;
     public List<Player> players;
+    public List<Integer> scores = new ArrayList<Integer>();
+    public int wins;
 
     public Team(TeamColor color, int ID) {
         this.color = color;

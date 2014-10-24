@@ -18,11 +18,11 @@
     <string name="select_game_rules">Select game rules</string>
 
     <!-- Match finished dialog -->
-    <string name="match_statistics">Match statistics</string>
+    <string name="match_statistics_title">Match statistics %1$s / %2$s</string>
     <string name="goals">Goals</string>
     <string name="own_goals">Own</string>
-    <string name="total_matches">Total</string>
-    <string name="goals_balance">Total</string>
+    <string name="matches_won">Wins</string>
+    <string name="goals_balance">Diff</string>
     <string name="red_team_wins">Red team wins!</string>
     <string name="blue_team_wins">Blue team wins!</string>
     <string name="goto_next_match">Next match</string>
