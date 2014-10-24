@@ -1,7 +1,9 @@
 package com.performgroup.innovation.kickers.statistics;
 
+import com.performgroup.innovation.kickers.core.Lineups;
 import com.performgroup.innovation.kickers.core.MatchScore;
 import com.performgroup.innovation.kickers.core.Player;
+import com.performgroup.innovation.kickers.core.Team;
 import com.performgroup.innovation.kickers.core.TeamColor;
 
 import java.util.ArrayList;
@@ -13,10 +15,9 @@ import java.util.Map;
 
 public class GameResults {
 
-    public int redsWins;
-    public int blueWins;
     public List<MatchScore> matchesScore;
     public Map<Integer, PlayerResults> playerStatistics;
+    public Lineups lineups;
 
     public GameResults() {
         matchesScore = new ArrayList<MatchScore>();
@@ -35,20 +36,15 @@ public class GameResults {
 
     public void registerMatchScore(MatchScore matchScore) {
         this.matchesScore.add(matchScore);
-        if (matchScore.getWinner().equals(TeamColor.BLUE)) blueWins++;
-        if (matchScore.getWinner().equals(TeamColor.RED)) redsWins++;
-    }
 
-    public TeamColor getWinner() {
-        if (redsWins > blueWins) {
-            return TeamColor.RED;
-        } else {
-            if (redsWins < blueWins) {
-                return TeamColor.BLUE;
-            } else {
-                return TeamColor.UNDEFINED;
-            }
-        }
+        Team teamBlue = lineups.getTeam(TeamColor.BLUE);
+        Team teamRed = lineups.getTeam(TeamColor.RED);
+
+        teamBlue.scores.add(matchScore.bluesPoints);
+        teamRed.scores.add(matchScore.redsPoints);
+
+        if (matchScore.getWinner().equals(TeamColor.BLUE)) teamBlue.wins++;
+        if (matchScore.getWinner().equals(TeamColor.RED)) teamRed.wins++;
     }
 
     public List<PlayerResults> getSortedPlayerGoalBalance() {

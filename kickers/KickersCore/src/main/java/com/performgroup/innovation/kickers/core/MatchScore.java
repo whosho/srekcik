@@ -4,6 +4,8 @@ public class MatchScore {
     public int redsPoints;
     public int bluesPoints;
 
+
+
     public TeamColor getWinner() {
         if (redsPoints > bluesPoints) {
             return TeamColor.RED;
