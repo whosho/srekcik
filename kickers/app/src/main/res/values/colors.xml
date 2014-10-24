@@ -7,7 +7,10 @@
     <color name="blue_team_color">#0078ff</color>
     <color name="blue_team_color_highlighted">#4da1ff</color>
     <color name="match_info_background">#c0000000</color>
-    <color name="field_green_dark">#ff4f9d28</color>
+    <color name="field_green_dark">#4f9d28</color>
     <color name="field_green">#ffcfffe0</color>
+    <color name="button_green">#4f9d28</color>
+    <color name="button_green_highlighted">#5cb82f</color>
+    <color name="button_green_disabled">#b0b0b0</color>
 
 </resources>

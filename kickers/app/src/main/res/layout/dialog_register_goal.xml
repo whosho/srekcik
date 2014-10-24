@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="8dp">
 
     <TextView
         android:id="@+id/tv_match_finished_title"
@@ -11,46 +12,44 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:padding="10dp"
-        tools:text="Register goal for Player 1"
         android:textAppearance="?android:textAppearanceLarge"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        tools:text="Register goal for Player 1" />
 
     <RadioGroup
         android:id="@+id/rg_goal_options"
         android:layout_width="match_parent"
-        android:padding="10dp"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content">
 
         <RadioButton
             android:id="@+id/rb_goal"
+            style="@style/goal_dialog_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/goal"
-            style="@style/goal_dialog_item"
-            android:checked="true" />
+            android:checked="true"
+            android:text="@string/goal" />
 
         <RadioButton
             android:id="@+id/rb_own_goal"
+            style="@style/goal_dialog_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/goal_dialog_item"
             android:text="@string/own_goal" />
 
         <RadioButton
             android:id="@+id/rb_delete_goal"
+            style="@style/goal_dialog_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/goal_dialog_item"
             android:text="@string/delete_goal" />
 
     </RadioGroup>
 
     <Button
         android:id="@+id/b_register_goal"
+        style="@style/normal_button_style"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:textSize="20sp"
         android:text="@string/register_goal" />
 
 </LinearLayout>
