@@ -1,100 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_marginTop="20dp"
+    android:orientation="horizontal"
+    android:weightSum="2">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/field_green_dark"
-        android:gravity="center"
-        android:padding="10dp"
-        android:text="@string/pick_players"
-        android:textAppearance="?android:textAppearanceLarge"
-        android:textColor="@android:color/white"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/tv_warning"
-        style="@style/list_header_small"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="4 players needed" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
+    <RelativeLayout
+        android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal"
-        android:weightSum="2">
+        android:layout_weight="1">
 
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
+        <TextView
+            android:id="@+id/tv_available"
+            style="@style/list_header_small"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="@string/available_players" />
 
-            <TextView
-                android:id="@+id/tv_available"
-                style="@style/list_header_small"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:gravity="center"
-                android:text="@string/available_players" />
+        <Button
+            android:id="@+id/b_create_new"
+            style="@style/button_normal_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="@string/create_new_player" />
 
-            <Button
-                android:id="@+id/b_create_new"
-                style="@style/normal_button_style"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:text="@string/create_new_player" />
+        <ListView
+            android:id="@+id/lv_available_players"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/b_create_new"
+            android:layout_below="@id/tv_available"
+            android:divider="@android:color/transparent"
+            android:padding="2dp" />
 
-            <ListView
-                android:id="@+id/lv_available_players"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_above="@id/b_create_new"
-                android:layout_below="@id/tv_available">
+    </RelativeLayout>
 
-            </ListView>
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
 
-        </RelativeLayout>
+        <TextView
+            android:id="@+id/tv_warning"
+            style="@style/list_header_small"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:gravity="center"
+            android:padding="5dp"
+            tools:text="4 players needed" />
 
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
+        <Button
+            android:id="@+id/b_play"
+            style="@style/button_play_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="@string/start_playing" />
 
-            <TextView
-                android:id="@+id/tv_chosen"
-                style="@style/list_header_small"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:gravity="center"
-                android:text="@string/chosen_players" />
+        <ListView
+            android:id="@+id/lv_chosen_players"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/b_play"
+            android:layout_below="@id/tv_warning"
+            android:divider="@android:color/transparent"
+            android:padding="2dp" />
 
-            <Button
-                android:id="@+id/b_play"
-                style="@style/normal_button_style"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:text="@string/start_playing" />
-
-            <ListView
-                android:id="@+id/lv_chosen_players"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_above="@id/b_play"
-                android:layout_below="@id/tv_chosen" />
-
-
-        </RelativeLayout>
-
-    </LinearLayout>
+    </RelativeLayout>
 
 </LinearLayout>
