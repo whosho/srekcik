@@ -60,12 +60,14 @@ public class PickPlayerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         KickersApplication.inject(this);
         view = inflater.inflate(R.layout.fragment_pick_players, container, false);
+
         initViews();
         return view;
     }
 
     private void initViews() {
         Context context = getActivity();
+
         availableAdapter = new AvailablePlayersAdapter(context);
         chosenAdapter = new ChosenPlayerAdapter(context);
 
@@ -107,6 +109,7 @@ public class PickPlayerFragment extends Fragment {
         });
 
         waringText = (TextView) view.findViewById(R.id.tv_warning);
+        waringText.setText("Add 4 player(s)");
         availablePlayerListHeader = (TextView) view.findViewById(R.id.tv_available);
     }
 
@@ -194,7 +197,7 @@ public class PickPlayerFragment extends Fragment {
         playButton.setEnabled(count == MINIMAL_PLAYERS_COUNT);
 
         if (missingPlayersCount > 0) {
-            waringText.setText("Add another " + missingPlayersCount + " player(s)");
+            waringText.setText("Add " + missingPlayersCount + " player(s)");
         } else if (count == MINIMAL_PLAYERS_COUNT) {
             waringText.setText("Teams ready!");
         } else {

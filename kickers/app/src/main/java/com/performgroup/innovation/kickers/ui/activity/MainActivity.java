@@ -1,11 +1,14 @@
 package com.performgroup.innovation.kickers.ui.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 
 import com.performgroup.innovation.kickers.R;
 import com.performgroup.innovation.kickers.application.GameAPI;
@@ -32,7 +35,23 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_players);
         KickersApplication.inject(this);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.t_toolbar);
+        toolbar.setTitleTextColor(Color.WHITE);
+        toolbar.setSubtitle(R.string.pick_players);
+        toolbar.setSubtitleTextColor(Color.WHITE);
+        toolbar.setLogo(R.drawable.ic_launcher);
+
+        setSupportActionBar(toolbar);
+
         loadFragmentContainer(new PickPlayerFragment());
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.players, menu);
+
+        return true;
     }
 
     @Override

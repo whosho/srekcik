@@ -61,8 +61,6 @@ public class MatchActivity extends ActionBarActivity {
 
         KickersApplication.inject(this);
 
-        //Typeface font = Typeface.createFromAsset(getAssets(), CustomFont.ORBITRON_BOLD_FONT);
-
         int maxGoals = gameAPI.getMaxGoals();
 
         blueBoxPoints = (BoxPoints) findViewById(R.id.bp_blue_points);
