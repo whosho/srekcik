@@ -10,10 +10,12 @@ public class GameRules {
     public boolean shufflePositions;
     public boolean shuffleTeamColors;
 
-    public GameRules(String name, int maxMatches, int maxGoals) {
+    public GameRules(String name, int maxMatches, int maxGoals, boolean shufflePositions, boolean shuffleTeamsColors) {
         this.name = name;
         this.maxMatchesCount = maxMatches;
         this.maxGoals = maxGoals;
+        this.shufflePositions = shufflePositions;
+        this.shuffleTeamColors = shuffleTeamsColors;
         pointLimitMatchRules = new PointLimitMatchRules(maxGoals);
     }
 

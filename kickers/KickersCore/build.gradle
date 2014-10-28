@@ -2,4 +2,15 @@ apply plugin: 'java'
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    testCompile 'org.easytesting:fest-assert:1.4'
+    testCompile('junit:junit:4.11') {
+        exclude module: 'hamcrest-core'
+    }
+    testCompile 'org.hamcrest:hamcrest-integration:1.1',
+            'org.hamcrest:hamcrest-core:1.1',
+            'org.hamcrest:hamcrest-library:1.1',
+            'org.mockito:mockito-all:1.9.5'
+
 }
+

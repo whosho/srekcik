@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Created by Grzegorz.Barski on 2014-10-14.
- */
 public class Lineups {
     public List<Team> teams;
 
@@ -23,23 +20,26 @@ public class Lineups {
 
     public void shufflePositions(int i) {
         if (i == 0 || i == 1) {
-            teams.get(i).switchRole();
+            teams.get(i).switchRoles();
         }
     }
 
     public static Lineups from(List<Player> playerList) {
         Collections.shuffle(playerList);
 
-        playerList.get(0).assign(TeamColor.BLUE, PlayerRole.DEFFENDER);
-        playerList.get(1).assign(TeamColor.BLUE, PlayerRole.ATTACER);
-        playerList.get(2).assign(TeamColor.RED, PlayerRole.DEFFENDER);
-        playerList.get(3).assign(TeamColor.RED, PlayerRole.ATTACER);
-
         Lineups lineups = new Lineups();
-        lineups.teams.get(0).add(playerList.get(0));
-        lineups.teams.get(0).add(playerList.get(1));
-        lineups.teams.get(1).add(playerList.get(2));
-        lineups.teams.get(1).add(playerList.get(3));
+        Team first =  lineups.teams.get(0);
+        Team second =  lineups.teams.get(1);
+
+        playerList.get(0).assign(first, PlayerRole.DEFFENDER);
+        playerList.get(1).assign(first, PlayerRole.ATTACER);
+        playerList.get(2).assign(second, PlayerRole.DEFFENDER);
+        playerList.get(3).assign(second, PlayerRole.ATTACER);
+
+        first.add(playerList.get(0));
+        first.add(playerList.get(1));
+        second.add(playerList.get(2));
+        second.add(playerList.get(3));
 
         return lineups;
     }
@@ -49,5 +49,18 @@ public class Lineups {
             if (team.color.equals(color)) return team;
         }
         return Team.NULL;
+    }
+
+    public void addTeam(Team team) {
+        teams.add(team);
+    }
+
+    public int getOponentTeamOf(int teamID) {
+        for (Team team: teams)
+        {
+            if(team.ID!=teamID) return team.ID;
+        }
+
+        return Team.NULL.ID;
     }
 }

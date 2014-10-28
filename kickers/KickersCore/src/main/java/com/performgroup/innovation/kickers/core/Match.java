@@ -11,21 +11,7 @@ public class Match {
         this.score = new MatchScore();
     }
 
-    public void onGoal(TeamColor color) {
-        if (color.equals(TeamColor.BLUE)) {
-            score.bluesPoints++;
-        }
-        if (color.equals(TeamColor.RED)) {
-            score.redsPoints++;
-        }
-    }
-
-    public void onOwnGoal(TeamColor color) {
-        if (color.equals(TeamColor.RED)) {
-            score.bluesPoints++;
-        }
-        if (color.equals(TeamColor.BLUE)) {
-            score.redsPoints++;
-        }
+    public void onGoal(int teamID) {
+        score.addPointForTeam(teamID);
     }
 }

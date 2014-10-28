@@ -76,8 +76,8 @@ public class BaseModule {
 
     private List<GameRules> defineGameRules() {
         List<GameRules> gameRuleses = new ArrayList<GameRules>();
-        gameRuleses.add(new GameRules(getString(R.string.game_name_exhibition_match) + " 5 po 5", 5, 5));
-        gameRuleses.add(new GameRules(getString(R.string.game_name_exhibition_match) + " 5 do 8", 5, 8));
+        gameRuleses.add(new GameRules(getString(R.string.game_name_exhibition_match) + "\n5 po 5", 5, 5, true, true));
+        gameRuleses.add(new GameRules(getString(R.string.game_name_exhibition_match) + "\n5 do 8", 5, 8, true, true));
         //    gameRuleses.add(new GameRules(getString(R.string.game_name_three_wins), 5, 8));
         //  gameRuleses.add(new GameRules(getString(R.string.game_name_sparring), 5, 8));
         return gameRuleses;

@@ -12,7 +12,6 @@ public class PointLimitMatchRules implements MatchRules {
 
     @Override
     public boolean isFinish(MatchScore score) {
-        return score.bluesPoints >= pointsLimit
-                || score.redsPoints >= pointsLimit;
+        return score.isValueReached(pointsLimit);
     }
 }

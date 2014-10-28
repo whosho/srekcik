@@ -49,16 +49,19 @@ public class GameAPI {
     }
 
     public void registerOwnGoal(Player player) {
-        match.onOwnGoal(player.color);
+
+
+
+        match.onGoal(match.lineups.getOponentTeamOf(player.teamID));
         results.registerGoal(player, true);
-        bus.post(new GoalEvent(player.color, match.score, true));
+        bus.post(new GoalEvent(player, match.score, true));
         validateMatchEnd();
     }
 
     public void registerGoal(Player player) {
-        match.onGoal(player.color);
+        match.onGoal(player.teamID);
         results.registerGoal(player, false);
-        bus.post(new GoalEvent(player.color, match.score, false));
+        bus.post(new GoalEvent(player, match.score, false));
         validateMatchEnd();
     }
 
@@ -138,7 +141,7 @@ public class GameAPI {
     }
 
     public void createPlayer(String playerName) {
-        Player player = new Player(playersList.players.size(), playerName, TeamColor.UNDEFINED, PlayerRole.UNDEFINED);
+        Player player = new Player(playersList.getFreeID(), playerName, PlayerRole.UNDEFINED);
         playersList.players.add(player);
         savePlayersList(playersList);
         bus.post(new PlayerCreatedEvent());
@@ -160,6 +163,10 @@ public class GameAPI {
             match = game.start();
         }
         bus.post(new MatchStartedEvent(match));
+    }
+
+    public Team getTeam(TeamColor teamColor) {
+        return lineups.getTeam(teamColor);
     }
 }
 

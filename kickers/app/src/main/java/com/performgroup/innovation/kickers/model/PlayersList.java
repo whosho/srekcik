@@ -15,4 +15,18 @@ public class PlayersList {
     public PlayersList() {
         players = new ArrayList<Player>();
     }
+
+    public int getFreeID()
+    {
+        int freeID = 0;
+        for(Player player: players)
+        {
+            if(player.id==freeID)
+            {
+                freeID++;
+            }
+        }
+
+        return freeID;
+    }
 }

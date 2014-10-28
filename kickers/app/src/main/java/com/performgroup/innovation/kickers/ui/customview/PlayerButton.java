@@ -15,7 +15,7 @@ public class PlayerButton extends TextView implements View.OnClickListener {
     private OnClickListener listener;
 
     public interface OnClickListener {
-        void onPlayerClick(Player player, TeamColor teamColor);
+        void onPlayerClick(Player player);
     }
 
     public PlayerButton(Context context) {
@@ -38,7 +38,7 @@ public class PlayerButton extends TextView implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        listener.onPlayerClick(player, teamColor);
+        listener.onPlayerClick(player);
     }
 
     public void setPlayerClickListener(OnClickListener listener) {
@@ -47,7 +47,6 @@ public class PlayerButton extends TextView implements View.OnClickListener {
 
     public void setPlayer(Player player) {
         this.player = player;
-        this.teamColor = player.color;
         setText(player.name);
     }
 

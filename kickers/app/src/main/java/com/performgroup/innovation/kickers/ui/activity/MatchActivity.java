@@ -42,6 +42,8 @@ public class MatchActivity extends ActionBarActivity {
 
     TextView tvScoreRed;
     TextView tvScoreBlue;
+    TextView tvTeamOneName;
+    TextView tvTeamTwoName;
     TextView matchInfo;
 
     @Inject
@@ -83,6 +85,8 @@ public class MatchActivity extends ActionBarActivity {
 
         tvScoreBlue = (TextView) findViewById(R.id.tv_blues_score);
         tvScoreRed = (TextView) findViewById(R.id.tv_reds_score);
+        tvTeamOneName = (TextView) findViewById(R.id.tv_team_one_name);
+        tvTeamTwoName = (TextView) findViewById(R.id.tv_team_two_name);
 
         matchInfo = (TextView) findViewById(R.id.tv_match_number);
 
@@ -95,6 +99,7 @@ public class MatchActivity extends ActionBarActivity {
         super.onResume();
         eventBus.register(this);
 
+        player.registerSound(R.raw.whistle_start);
         player.registerSound(R.raw.crowd_quiet);
         player.registerSound(R.raw.ding);
         player.registerSound(R.raw.point);
@@ -120,18 +125,20 @@ public class MatchActivity extends ActionBarActivity {
     }
 
     public void updateLineups() {
-        Team blue = match.lineups.getTeam(TeamColor.BLUE);
-        tvBlueAttackerName.setPlayer(blue.getPlayer(PlayerRole.ATTACER));
-        tvBlueDefenderName.setPlayer(blue.getPlayer(PlayerRole.DEFFENDER));
+        Team teamOne = match.lineups.getTeam(TeamColor.BLUE);
+        tvBlueAttackerName.setPlayer(teamOne.getPlayer(PlayerRole.ATTACER));
+        tvBlueDefenderName.setPlayer(teamOne.getPlayer(PlayerRole.DEFFENDER));
+        tvTeamOneName.setText(teamOne.getName());
 
-        Team red = match.lineups.getTeam(TeamColor.RED);
-        tvRedAttackerName.setPlayer(red.getPlayer(PlayerRole.ATTACER));
-        tvRedDefenderName.setPlayer(red.getPlayer(PlayerRole.DEFFENDER));
+        Team teamTwo = match.lineups.getTeam(TeamColor.RED);
+        tvRedAttackerName.setPlayer(teamTwo.getPlayer(PlayerRole.ATTACER));
+        tvRedDefenderName.setPlayer(teamTwo.getPlayer(PlayerRole.DEFFENDER));
+        tvTeamTwoName.setText(teamTwo.getName());
     }
 
     public void updateScore(MatchScore score) {
-        int bluePoints = score.bluesPoints;
-        int redPoints = score.redsPoints;
+        int bluePoints = score.getPoints(0);
+        int redPoints = score.getPoints(1);
 
         tvScoreBlue.setText(bluePoints + "");
         tvScoreRed.setText(redPoints + "");
@@ -144,11 +151,10 @@ public class MatchActivity extends ActionBarActivity {
     public void onGoal(GoalEvent event) {
         updateScore(event.score);
         if (vibrator.hasVibrator()) {
-            vibrator.vibrate(100);
+            vibrator.vibrate(300);
         }
 
-        player.play(event.isOwnGoal ? R.raw.boooo : R.raw.applause);
-
+        player.play(R.raw.whistle_start);
     }
 
     @Subscribe
@@ -159,7 +165,7 @@ public class MatchActivity extends ActionBarActivity {
         updateMatchInfo();
         updateLineups();
         updateScore(match.score);
-        player.stop(R.raw.crowd_quiet);
+        player.stop(R.raw.tada);
     }
 
     @Subscribe
@@ -180,7 +186,6 @@ public class MatchActivity extends ActionBarActivity {
         player.play(R.raw.crowd_quiet, true);
     }
 
-
     @Subscribe
     public void onGameFinished(GameFinishedEvent event) {
         MatchFinishedDialog dialog = new MatchFinishedDialog();
@@ -190,15 +195,15 @@ public class MatchActivity extends ActionBarActivity {
     PlayerButton.OnClickListener clickListener = new PlayerButton.OnClickListener() {
 
         @Override
-        public void onPlayerClick(Player teamPlayer, TeamColor teamColor) {
+        public void onPlayerClick(Player teamPlayer) {
             player.play(R.raw.point);
-            openGoalDialog(teamPlayer, teamColor);
+            openGoalDialog(teamPlayer);
         }
-
     };
 
-    private void openGoalDialog(Player player, TeamColor teamColor) {
-        GoalDialog dialog = GoalDialog.createInstance(player);
+    private void openGoalDialog(Player teamPlayer) {
+        player.play(R.raw.ding);
+        GoalDialog dialog = GoalDialog.createInstance(teamPlayer);
         FragmentManager fragmentManager = getSupportFragmentManager();
         dialog.show(fragmentManager, "goal_dialog");
     }

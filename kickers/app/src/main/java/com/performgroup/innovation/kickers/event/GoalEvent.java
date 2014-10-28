@@ -5,13 +5,12 @@ import com.performgroup.innovation.kickers.core.Player;
 import com.performgroup.innovation.kickers.core.TeamColor;
 
 public class GoalEvent {
-    public TeamColor teamColor;
     public Player player;
     public MatchScore score;
     public boolean isOwnGoal;
 
-    public GoalEvent(TeamColor teamColor, MatchScore score, boolean isOwnGoal) {
-        this.teamColor = teamColor;
+    public GoalEvent(Player player, MatchScore score, boolean isOwnGoal) {
+        this.player = player;
         this.score = score;
         this.isOwnGoal = isOwnGoal;
     }

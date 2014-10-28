@@ -61,33 +61,6 @@ public class Game {
         return rules.maxGoals;
     }
 
-    public List<Integer> getBlueMatchStats() {
-        List<Integer> blueStats = new ArrayList<Integer>();
-        for (Match match : matches) {
-            blueStats.add(match.score.bluesPoints);
-
-        }
-        return blueStats;
-    }
-
-    public List<Integer> getRedMatchStats() {
-        List<Integer> redStats = new ArrayList<Integer>();
-        for (Match match : matches) {
-            redStats.add(match.score.redsPoints);
-
-        }
-        return redStats;
-    }
-
-    public String getMatchStats() {
-        String stats = "";
-        for (Match match : matches) {
-            stats += "Match " + match.ID + ") " + match.score.redsPoints + " : " + match.score.bluesPoints + "\n";
-        }
-
-        return stats;
-    }
-
     public boolean isStarted() {
         return isStarted;
     }

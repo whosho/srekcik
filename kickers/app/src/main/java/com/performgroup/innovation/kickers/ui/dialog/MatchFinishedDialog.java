@@ -19,6 +19,7 @@ import com.performgroup.innovation.kickers.application.KickersApplication;
 import com.performgroup.innovation.kickers.core.MatchScore;
 import com.performgroup.innovation.kickers.core.Player;
 import com.performgroup.innovation.kickers.core.Team;
+import com.performgroup.innovation.kickers.core.TeamColor;
 import com.performgroup.innovation.kickers.event.MatchResultConfirmedEvent;
 import com.performgroup.innovation.kickers.statistics.GameResults;
 import com.performgroup.innovation.kickers.statistics.PlayerResults;
@@ -68,9 +69,12 @@ public class MatchFinishedDialog extends DialogFragment {
 
         String title = getString(R.string.match_statistics_title, currentMatchNumber, numberOfMatches);
 
+        Team blueTeam = gameAPI.getTeam(TeamColor.BLUE);
+        Team redTeam = gameAPI.getTeam(TeamColor.RED);
+
         ((TextView) view.findViewById(R.id.tv_match_finished_title)).setText(title);
-        ((TextView) view.findViewById(R.id.tv_red_points)).setText(lastScore.redsPoints + "");
-        ((TextView) view.findViewById(R.id.tv_blue_points)).setText(lastScore.bluesPoints + "");
+        ((TextView) view.findViewById(R.id.tv_blue_points)).setText(lastScore.getPoints(blueTeam.ID) + "");
+        ((TextView) view.findViewById(R.id.tv_red_points)).setText(lastScore.getPoints(redTeam.ID) + "");
 
         drawMatchHistory(numberOfMatches);
         drawPlayerStatistics();

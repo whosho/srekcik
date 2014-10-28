@@ -40,11 +40,11 @@ public class GameResults {
         Team teamBlue = lineups.getTeam(TeamColor.BLUE);
         Team teamRed = lineups.getTeam(TeamColor.RED);
 
-        teamBlue.scores.add(matchScore.bluesPoints);
-        teamRed.scores.add(matchScore.redsPoints);
+        teamBlue.scores.add(matchScore.getPoints(teamBlue.ID));
+        teamRed.scores.add(matchScore.getPoints(teamRed.ID));
 
-        if (matchScore.getWinner().equals(TeamColor.BLUE)) teamBlue.wins++;
-        if (matchScore.getWinner().equals(TeamColor.RED)) teamRed.wins++;
+        if (matchScore.getWinner()==(teamBlue.ID)) teamBlue.wins++;
+        if (matchScore.getWinner()==(teamRed.ID)) teamRed.wins++;
     }
 
     public List<PlayerResults> getSortedPlayerGoalBalance() {

@@ -5,13 +5,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.performgroup.innovation.kickers.R;
 import com.performgroup.innovation.kickers.application.KickersApplication;
 import com.performgroup.innovation.kickers.core.Player;
-import com.performgroup.innovation.kickers.event.PickPlayersListUpdated;
 import com.squareup.otto.Bus;
 
 import java.util.ArrayList;
@@ -83,6 +81,6 @@ public class ChosenPlayerAdapter extends BaseAdapter {
 
     static class ViewHolder {
         TextView name;
-        }
+    }
 
 }

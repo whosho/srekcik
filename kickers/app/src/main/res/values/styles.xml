@@ -15,7 +15,7 @@
     <style name="button_normal_style">
         <item name="android:textColor">@android:color/white</item>
         <item name="android:background">@drawable/button_normal_selector</item>
-        <item name="android:padding">15dp</item>
+        <item name="android:padding">25dp</item>
         <item name="android:layout_margin">2dp</item>
     </style>
 
@@ -23,6 +23,18 @@
         <item name="android:textAppearance">?android:textAppearanceLarge</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">40sp</item>
+    </style>
+
+    <style name="score_team_info">
+        <item name="android:textAppearance">?android:textAppearanceLarge</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+
+    <style name="score_team_info_small" parent="score_team_info">
+        <item name="android:textSize">18sp</item>
     </style>
 
     <style name="match_score">
