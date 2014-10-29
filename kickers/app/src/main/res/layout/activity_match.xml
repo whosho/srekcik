@@ -13,7 +13,7 @@
         android:layout_height="match_parent"
         android:layout_weight="2">
 
-        <com.performgroup.innovation.kickers.ui.customview.BoxPoints
+        <com.placeholder.kickers.ui.customview.BoxPoints
             android:id="@+id/bp_blue_points"
             android:layout_width="30dp"
             android:layout_height="wrap_content"
@@ -50,7 +50,7 @@
             android:orientation="horizontal"
             android:weightSum="2">
 
-            <com.performgroup.innovation.kickers.ui.customview.PlayerButton
+            <com.placeholder.kickers.ui.customview.PlayerButton
                 android:id="@+id/tv_player_red_deffender_name"
                 style="@style/match_field_player_red_name"
                 android:layout_width="0dp"
@@ -60,7 +60,7 @@
                 android:gravity="center"
                 tools:text="Player 1" />
 
-            <com.performgroup.innovation.kickers.ui.customview.PlayerButton
+            <com.placeholder.kickers.ui.customview.PlayerButton
                 android:id="@+id/tv_player_red_attacker_name"
                 style="@style/match_field_player_red_name"
                 android:layout_width="0dp"
@@ -80,7 +80,7 @@
             android:orientation="horizontal"
             android:weightSum="2">
 
-            <com.performgroup.innovation.kickers.ui.customview.PlayerButton
+            <com.placeholder.kickers.ui.customview.PlayerButton
                 android:id="@+id/tv_player_blue_deffender_name"
                 style="@style/match_field_player_blue_name"
                 android:layout_width="0dp"
@@ -90,7 +90,7 @@
                 android:gravity="center"
                 tools:text="Player 1" />
 
-            <com.performgroup.innovation.kickers.ui.customview.PlayerButton
+            <com.placeholder.kickers.ui.customview.PlayerButton
                 android:id="@+id/tv_player_blue_attacker_name"
                 style="@style/match_field_player_blue_name"
                 android:layout_width="0dp"
@@ -193,7 +193,7 @@
         android:layout_height="match_parent"
         android:layout_weight="2">
 
-        <com.performgroup.innovation.kickers.ui.customview.BoxPoints
+        <com.placeholder.kickers.ui.customview.BoxPoints
             android:id="@+id/bp_red_points"
             android:layout_width="30dp"
             android:layout_height="wrap_content"

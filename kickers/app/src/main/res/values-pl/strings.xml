@@ -34,7 +34,7 @@
 
     <!-- Register goal dialog -->
     <string name="goal">Gol!</string>
-    <string name="own_goal">Kurde, samobój... :(</string>
+    <string name="own_goal">Kurde, samobój&#8230; :(</string>
     <string name="delete_goal">Anuluj poprzedni gol</string>
     <string name="register_goal">Zapisz gol</string>
     <string name="register_goal_title">Zapisz gol dla %1$s</string>
@@ -45,7 +45,7 @@
     <!-- Lineups Dialog-->
     <string name="attack">Atak</string>
     <string name="defense">Obrona</string>
-    <string name="lineups">USTAWIENIE</string>
+    <string name="lineups">Składy</string>
     <string name="next">DALEJ</string>
 
 </resources>

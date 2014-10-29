@@ -36,12 +36,12 @@
             android:layout_height="wrap_content"
             android:text="Team ONE" />
 
-        <com.performgroup.innovation.kickers.ui.customview.LineupsItem
+        <com.placeholder.kickers.ui.customview.LineupsItem
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/team_one_attack" />
 
-        <com.performgroup.innovation.kickers.ui.customview.LineupsItem
+        <com.placeholder.kickers.ui.customview.LineupsItem
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/team_one_defense" />
@@ -51,12 +51,12 @@
             android:layout_height="wrap_content"
             android:text="Team TWO" />
 
-        <com.performgroup.innovation.kickers.ui.customview.LineupsItem
+        <com.placeholder.kickers.ui.customview.LineupsItem
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/team_two_attack" />
 
-        <com.performgroup.innovation.kickers.ui.customview.LineupsItem
+        <com.placeholder.kickers.ui.customview.LineupsItem
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/team_two_defense" />

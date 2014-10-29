@@ -4,7 +4,7 @@ android {
     compileSdkVersion 21
     buildToolsVersion '21.0.2'
     defaultConfig {
-        applicationId 'com.performgroup.innovation.kickers'
+        applicationId 'com.placeholder.kickers'
         minSdkVersion 13
         targetSdkVersion 21
         versionCode 1
