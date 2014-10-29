@@ -168,5 +168,9 @@ public class GameAPI {
     public Team getTeam(TeamColor teamColor) {
         return lineups.getTeam(teamColor);
     }
+
+    public Lineups getLineups() {
+        return lineups;
+    }
 }
 

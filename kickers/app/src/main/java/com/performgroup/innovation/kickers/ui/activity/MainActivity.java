@@ -15,7 +15,9 @@ import com.performgroup.innovation.kickers.application.GameAPI;
 import com.performgroup.innovation.kickers.application.KickersApplication;
 import com.performgroup.innovation.kickers.event.GameRulesChoosenEvent;
 import com.performgroup.innovation.kickers.event.GameRulesDialogRequestedEvent;
+import com.performgroup.innovation.kickers.event.LineupsConfirmedEvent;
 import com.performgroup.innovation.kickers.ui.dialog.GameRulesDialog;
+import com.performgroup.innovation.kickers.ui.dialog.LineupsDialog;
 import com.performgroup.innovation.kickers.ui.fragment.PickPlayerFragment;
 import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
@@ -70,6 +72,14 @@ public class MainActivity extends ActionBarActivity {
     public void onGameRulesChoosenEvent(GameRulesChoosenEvent event) {
         gameAPI.setRules(event.selectedGameRules);
         gameAPI.startNewGame();
+
+        openLineupsDialog();
+    }
+
+
+    @Subscribe
+    public void onLineupsConfirmedevent(LineupsConfirmedEvent event)
+    {
         openMatchActivity();
     }
 
@@ -94,5 +104,10 @@ public class MainActivity extends ActionBarActivity {
         transaction.commitAllowingStateLoss();
     }
 
+    private void openLineupsDialog() {
+        LineupsDialog dialog = new LineupsDialog();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        dialog.show(fragmentManager, "lineups_dialog");
+    }
 
 }

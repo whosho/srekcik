@@ -24,6 +24,7 @@ import com.performgroup.innovation.kickers.service.SoundService;
 import com.performgroup.innovation.kickers.ui.customview.BoxPoints;
 import com.performgroup.innovation.kickers.ui.customview.PlayerButton;
 import com.performgroup.innovation.kickers.ui.dialog.GoalDialog;
+import com.performgroup.innovation.kickers.ui.dialog.LineupsDialog;
 import com.performgroup.innovation.kickers.ui.dialog.MatchFinishedDialog;
 import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
@@ -185,6 +186,7 @@ public class MatchActivity extends ActionBarActivity {
         updateScore(match.score);
         player.play(R.raw.crowd_quiet, true);
     }
+
 
     @Subscribe
     public void onGameFinished(GameFinishedEvent event) {

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Kickers</string>
+    <string name="action_settings">Ustawienia</string>
+
+    <!-- Pick players -->
+    <string name="pick_players">Wybierz graczy</string>
+    <string name="available_players">Dostępni</string>
+    <string name="chosen_players">Wybrani</string>
+    <string name="create_new_player">Nowy gracz</string>
+    <string name="start_playing">GRAMY !</string>
+    <string name="game_finished">KONIEC GRY!</string>
+
+    <!-- Match area -->
+    <string name="match_info">Mecz %1$s / %2$s</string>
+    <string name="score_separator">&#160;:&#160;</string>
+    <string name="select_game_rules">Wybierz zasady gry</string>
+
+    <!-- Match finished dialog -->
+    <string name="match_statistics_title">Statystyki meczu %1$s / %2$s</string>
+    <string name="goals">Gole</string>
+    <string name="own_goals">Samobójcze</string>
+    <string name="matches_won">Wygrane</string>
+    <string name="goals_balance">Różnica</string>
+    <string name="red_team_wins">Wygrali czerwoni!</string>
+    <string name="blue_team_wins">Wygrali niebiescy!</string>
+    <string name="goto_next_match">Kolejny mecz</string>
+
+    <!-- Create player dialog -->
+    <string name="save_player">Zapisz gracza</string>
+    <string name="create_player_title">Utwórz nowego gracza</string>
+    <string name="player_name">Imię gracza</string>
+
+    <!-- Register goal dialog -->
+    <string name="goal">Gol!</string>
+    <string name="own_goal">Kurde, samobój... :(</string>
+    <string name="delete_goal">Anuluj poprzedni gol</string>
+    <string name="register_goal">Zapisz gol</string>
+    <string name="register_goal_title">Zapisz gol dla %1$s</string>
+    <string name="game_name_exhibition_match">Mecz towarzyski</string>
+    <string name="game_name_sparring">Sparring</string>
+    <string name="game_name_three_wins">Do trzech zwycięstw</string>
+
+    <!-- Lineups Dialog-->
+    <string name="attack">Atak</string>
+    <string name="defense">Obrona</string>
+    <string name="lineups">USTAWIENIE</string>
+    <string name="next">DALEJ</string>
+
+</resources>

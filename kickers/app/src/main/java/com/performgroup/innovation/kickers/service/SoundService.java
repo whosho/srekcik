@@ -46,7 +46,7 @@ public class SoundService {
     }
 
     private void playSound(Integer soundID, boolean repeat) {
-        player.play(soundID, 1.0f, 1.0f, 1, repeat ? 1 : 0, 1f);
+        player.play(soundID, 0.5f, 0.5f, 1, repeat ? 1 : 0, 1f);
     }
 
 

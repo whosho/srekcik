@@ -20,9 +20,6 @@ import com.squareup.otto.Bus;
 
 import javax.inject.Inject;
 
-/**
- * Created by Grzegorz.Barski on 2014-10-20.
- */
 public class GameRulesDialog extends DialogFragment {
 
     private GameRulesAdapter rulesAdapter;

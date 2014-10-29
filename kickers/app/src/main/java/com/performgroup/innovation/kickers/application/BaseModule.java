@@ -16,6 +16,7 @@ import com.performgroup.innovation.kickers.ui.adapter.ChosenPlayerAdapter;
 import com.performgroup.innovation.kickers.ui.dialog.CreatePlayerDialog;
 import com.performgroup.innovation.kickers.ui.dialog.GameRulesDialog;
 import com.performgroup.innovation.kickers.ui.dialog.GoalDialog;
+import com.performgroup.innovation.kickers.ui.dialog.LineupsDialog;
 import com.performgroup.innovation.kickers.ui.dialog.MatchFinishedDialog;
 import com.performgroup.innovation.kickers.ui.fragment.PickPlayerFragment;
 import com.squareup.otto.Bus;
@@ -41,7 +42,8 @@ import dagger.Provides;
                 MatchFinishedDialog.class,
                 GameRulesDialog.class,
                 CreatePlayerDialog.class,
-                GoalDialog.class
+                GoalDialog.class,
+                LineupsDialog.class
         }
 )
 public class BaseModule {
@@ -78,8 +80,6 @@ public class BaseModule {
         List<GameRules> gameRuleses = new ArrayList<GameRules>();
         gameRuleses.add(new GameRules(getString(R.string.game_name_exhibition_match) + "\n5 po 5", 5, 5, true, true));
         gameRuleses.add(new GameRules(getString(R.string.game_name_exhibition_match) + "\n5 do 8", 5, 8, true, true));
-        //    gameRuleses.add(new GameRules(getString(R.string.game_name_three_wins), 5, 8));
-        //  gameRuleses.add(new GameRules(getString(R.string.game_name_sparring), 5, 8));
         return gameRuleses;
     }
 

@@ -40,6 +40,12 @@
     <string name="register_goal_title">Register goal for %1$s</string>
     <string name="game_name_exhibition_match">Mecz towarzyski</string>
     <string name="game_name_sparring">Sparing</string>
-    <string name="game_name_three_wins">Do trzech zwycięstw</string>
+
+    <!-- Lineups Dialog-->
+    <string name="attack">Attack</string>
+    <string name="defense">Defense</string>
+    <string name="ok">OK</string>
+    <string name="lineups">LINEUPS</string>
+    <string name="next">NEXT</string>
 
 </resources>
